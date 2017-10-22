@@ -1,0 +1,342 @@
+<html>
+   {% include 'login.html' %}
+   <head>
+      <title>Order Summary</title>
+      <script src="/static/js/jquery-1.9.1.js"></script>
+      {% include 'headtags.html' %}
+      <!--<link rel="stylesheet" href="/static/css/jquery-ui.min.css">-->
+      <!--<link rel="stylesheet" href="/static/css/jquery.selectBoxIt.css">-->
+      <link rel="stylesheet" href="/static/css/error-messages.css" />
+      <style type="text/css" media="screen">
+         #general-details-edit, #login-details-edit, #address-details-edit,
+         #consultation-mode-edit, #notification-pref-edit,
+         #subscription-pref-edit, #source-edit {
+         display: none;
+         }
+         .btn_submit {
+         background: url(/static/images/form/saved.svg);
+         border: 0;
+         display: block;
+         background-repeat: no-repeat;
+         width: 19px;
+         height: 14px;
+         float: right;
+         clear: both;
+         }
+         .selectboxit-container-selected * {
+         color: #b6b6b6;
+         }
+         #deregister-account{
+         color:#f00;
+         }
+         .service-my-wheels-form-1-filled-gp-address .col-sm-12{
+         font-size: 15px;
+         color: #000;
+         font-family: 'droid_sansregular';
+         }
+         .service-my-wheels-form-1-filled-gp-address span{
+         font-size: 14px;
+         color: #8B8B8B;
+         }
+         #gp_locality_box{
+         padding: 0;
+         width: 200px;
+         }
+         #gp_email_id_box{
+         padding: 0;
+         width: 200px;
+         }
+         .breakWord{
+         word-wrap: break-word;
+         }
+         .emltd-doc-add-scroll{
+         overflow:auto;
+         height:160px;
+         }
+         .address-scroll{
+         height: 95px;
+         overflow: visible;
+         margin-left: 0px;
+         }
+      </style>
+   </head>
+   <body>
+      {% include 'header.html' %}
+      <form method="post">
+         {% csrf_token %}
+         <div class="container service-my-wheels-form">
+         <div class="service-my-wheels-form-half">
+         <div class="row">
+            <div id="general-details-filled"
+               class="col-xs-6 universal-shadow service-my-wheels-form-half-box pull-left service-my-wheels-form-full-width" style="background-color:transparent;margin-bottom: 30px;  padding-left: 33px;padding-top: 20px;padding-bottom: 20px;">
+               <div class="row">
+                  <div class="port-os-heading">Select a pick up Address</div>
+               </div>
+               <!--<div class="row">-->
+
+               {% for obj in customers_addresses_list %}
+               {%if forloop.counter < 3 %}
+               <div class="row col-xs-4 port-os-addr-wrap universal-shadow pickUpAddress" id="address_{{obj.id}}" style="width:250px;">
+                  {% else %}
+                  <div class="row col-xs-4 port-os-addr-wrap universal-shadow pickUpAddress" id="address_{{obj.id}}" style="width:250px;margin-top:20px;">
+                     {% endif %}
+                     <div class="row">
+                        <div class="col-xs-10 port-os-name">
+                           {{user.customer_name}}
+                        </div>
+                        <div class="col-xs-2">
+                           <!--<img src="/static/portal/images/summary/down.png">-->
+                        </div>
+                     </div>
+                     <div class="row mCustomScrollbar address-scroll" data-mcs-theme="dark">
+                        <div class="row port-os-addr-section">
+                           <!--<div class="col-xs-12 port-os-addr">
+                              #205, 90/B, Kalyana Mantapa<br>
+                              4th Cross, 7th Block, Koramangala
+                              </div>-->
+                           <div class="col-xs-12 port-os-addr">
+                              {{ obj.address }}
+                           </div>
+                           <div class="col-xs-12 port-os-addr">
+                              {{obj.city}}, Karnataka - {{obj.pincode}}
+                           </div>
+                        </div>
+                     </div>
+                     <div id="sel-address-{{obj.id}}" class="row port-os-sel-addr">
+                        <div id="sel-address-txt-{{obj.id}}" class="col-xs-12 port-os-sel-text pickUpAddressSelected">Select Address</div>
+                     </div>
+                  </div>
+                  {% endfor %}
+                  <div id="add-pickup-addr" onclick="addMoreAddress()" class="row col-xs-4 port-os-addr-wrap port-os-addr-wrap-add universal-shadow morebuttonforaddress" style="width: 250px;height: 188px;">
+                     <div class="row">
+                        <div class="col-xs-12 port-os-addr-plus"><img src="/static/images/summary/plus.png" /></div>
+                        <div class="col-xs-12 port-os-addr-content">Add New</div>
+                        <div class="col-xs-12 port-os-addr-content">Address</div>
+                     </div>
+                  </div>
+                  <input type="hidden" name="user_selected_address_id" id="user_selected_address_id" value="0"/>
+                  <input type="hidden" name="user_drop_selected_address_id" id="user_drop_selected_address_id" value="0"/>
+                  <div class="row">
+                     <div class="col-xs-12" style="margin-top:20px;">
+                        <input type="checkbox" id="add-pick-up-address">
+                        <span>Drop Address different than Pickup Address</span>
+                     </div>
+                  </div>
+                  <!-- for drop address -->
+                  <div style="display:none" class="drop-address-div">
+                     <div class="row">
+                        <div class="port-os-heading">Select a drop Address</div>
+                     </div>
+                     <!--	<div class="row">-->
+                     {% for obj in customers_addresses_list %}
+                     {%if forloop.counter < 3 %}
+                     <div class="row col-xs-4 port-os-addr-wrap universal-shadow dropAddress" id="dropaddress_{{obj.id}}" style="width:250px;">
+                        {% else %}
+                        <div class="row col-xs-4 port-os-addr-wrap universal-shadow dropAddress" id="dropaddress_{{obj.id}}" style="width:250px;margin-top:20px;">
+                           {% endif %}
+                           <div class="row">
+                              <div class="col-xs-10 port-os-name">
+                                 {{user.customer_name}}
+                              </div>
+                              <div class="col-xs-2">
+                              </div>
+                           </div>
+                           <div class="row mCustomScrollbar address-scroll" data-mcs-theme="dark">
+                              <div class="row port-os-addr-section">
+                                 <!--<div class="col-xs-12 port-os-addr">
+                                    #205, 90/B, Kalyana Mantapa<br>
+                                    4th Cross, 7th Block, Koramangala
+                                    </div>-->
+                                 <div class="col-xs-12 port-os-addr">
+                                    {{ obj.address }}
+                                 </div>
+                                 <div class="col-xs-12 port-os-addr">
+                                    {{obj.city}}, Karnataka - {{obj.pincode}}
+                                 </div>
+                              </div>
+                           </div>
+                           <div id="sel-dropaddress-{{obj.id}}" class="row port-os-sel-addr">
+                              <div id="sel-dropaddress-txt-{{obj.id}}" class="col-xs-12 port-os-sel-text dropAddressSelected">Select Address</div>
+                           </div>
+                        </div>
+                        {% endfor %}
+                        <!--</div>-->
+                        <div id="add-drop-addr" onclick="addMoreAddress()" class="row col-xs-4 port-os-addr-wrap port-os-addr-wrap-add universal-shadow morebuttonforaddress" style="width: 250px;height: 188px;">
+                           <div class="row">
+                              <div class="col-xs-12 port-os-addr-plus"><img src="/static/images/summary/plus.png" /></div>
+                              <div class="col-xs-12 port-os-addr-content">Add New</div>
+                              <div class="col-xs-12 port-os-addr-content">Address</div>
+                           </div>
+                        </div>
+                     </div>
+
+                  </div>
+                  <div class="col-xs-6 universal-shadow service-my-wheels-form-half-box pull-right service-my-wheels-form-full-width">
+                     <div id="general-details-filled"
+                        class="universal-shadow service-my-wheels-form-1-filled">
+                        <div class="row">
+                           <div class="col-xs-12 service-my-wheels-form-1-filled-basic">
+                              <div class="row">
+                                 <div class="col-sm-12 service-my-wheels-form-1-filled-basic-l">
+                                    <div class="row">
+                                       <div class="col-xs-3"><span>Vehicle Type:</span></div>
+                                       <div class="col-xs-6 breakWord" style="margin-left:40px;">{{vehicle_type}}</div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="col-sm-12 service-my-wheels-form-1-filled-basic-l">
+                                    <div class="row">
+                                       <div class="col-xs-3"><span>Vehicle Brand:</span></div>
+                                       <div class="col-xs-6" style="margin-left:40px;">{{brand}}</div>
+                                    </div>
+                                 </div>
+                              </div>
+                              {%if service_center_address != '' %}
+                              <div class="row">
+                                 <div class="col-sm-12 service-my-wheels-form-1-filled-basic-l">
+                                    <div class="row">
+                                       <div class="col-xs-3"><span>Service Center:</span></div>
+                                       <div class="col-xs-6 breakWord" style="margin-left:40px;">{{service_center_address}}</div>
+                                    </div>
+                                 </div>
+                              </div>
+                              {% endif %}
+                              <div class="row">
+                                 <input type="hidden" name="selected_generic_problems_listed" id="selected_generic_problems_listed_by_user"  value='{{selected_generic_problems}}'>
+                                 <div class="col-sm-12 service-my-wheels-form-1-filled-basic-l">
+                                    <div class="row">
+                                       <div class="col-xs-3"><span>Generic Problems:</span></div>
+                                       <div class="col-xs-8 breakWord" style="margin-left:23px;">
+                                          <div class="col-sm-12  mCustomScrollbar emltd-doc-add-scroll _mCS_2 mCS_no_scrollbar" data-mcs-theme="dark">
+                                             <div id="mCSB_2" class="mCustomScrollBox mCS-dark mCSB_vertical mCSB_inside" tabindex="0">
+                                                <div id="mCSB_2_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position: relative; top: 0px; left: 0px;" dir="ltr">
+                                                   <ul id="invest-list" class="emltd-doctor-cons-invest-list" style="overflow-y:auto">
+                                                   </ul>
+                                                </div>
+                                                <div id="mCSB_2_scrollbar_vertical" class="mCSB_scrollTools mCSB_2_scrollbar mCS-dark mCSB_scrollTools_vertical" style="display: none;">
+                                                   <div class="mCSB_draggerContainer">
+                                                      <div id="mCSB_2_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; height: 0px; top: 0px;" oncontextmenu="return false;">
+                                                         <div class="mCSB_dragger_bar" style="line-height: 30px;"></div>
+                                                      </div>
+                                                      <div class="mCSB_draggerRail"></div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="col-sm-12 service-my-wheels-form-1-filled-basic-l">
+                                    <div class="row">
+                                       <div class="col-xs-3"><span>Specific Problem:</span></div>
+                                       <div class="col-xs-6 breakWord" style="margin-left:40px;">{{specific_problems}}</div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="col-sm-12 service-my-wheels-form-1-filled-basic-l">
+                                    <div class="row">
+                                       <div class="col-xs-3"><span>Service Type:</span></div>
+                                       <div class="col-xs-6 breakWord" style="margin-left:40px;">
+                                          <div class="row">
+                                             <div class="col-xs-12">
+                                                <div class="col-xs-6" style="padding:0px;">
+                                                   <input type="radio" class="service-type"  value="1" name="service-type" required>
+                                                   Paid
+                                                </div>
+                                                <div class="col-xs-6" style="padding:0px;">
+                                                   <input type="radio" class="service-type"  value="0" name="service-type">
+                                                   Free
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-xs-6 universal-shadow">
+               <div class="row service-my-wheels-form-spacer service-my-wheels-form-values">
+                        <div class="col-sm-3">
+                           <span>Email Id:</span>
+                        </div>
+                        <div class="col-sm-9">
+                           <input id="customer_email" type="text" value="{{customer_mail_id}}"
+                              name="customer_email" placeholder="Enter Email Id*" maxlength="60" >
+                        </div>
+                     </div>
+                     <div class="row service-my-wheels-form-spacer service-my-wheels-form-values">
+                        <div class="col-sm-12">
+                           <span>Your Invoice will be sent to this Email.</span>
+                        </div>
+                     </div>
+
+                     <div class="row service-my-wheels-form-spacer service-my-wheels-form-values">
+                        <div class="col-sm-3">
+                           <span>Mobile No:</span>
+                        </div>
+                        <div class="col-sm-9">
+                           <input id="mobile_number" type="text" value="" pattern="[789][0-9]{9}"
+                              name="mobile_number" placeholder="Enter mobile No*" maxlength="10" required>
+                        </div>
+                     </div>
+
+               <div class="row service-my-wheels-form-spacer service-my-wheels-form-values"></div>
+                  </div>
+               </div>
+               <div class="row service-my-wheels-form-spacer service-my-wheels-form-values">
+               <div id="errorMsgDivConfirmation"  class="errorMessage" style="display:none;margin-right:15px;">
+                    <div class="errorMessageTextContainer">
+                        <div class="field-container errorMessageText" id="errorMsgDivTextConfirmation" ></div>
+                    </div>
+                </div>
+               <button type="button" id="confirm-order" class="btn btn-default universal-button">Confirm Order</button>
+               <button type="button" id="edit-order" class="btn btn-default universal-button">Edit Order</button>
+                  </div>
+            </div>
+         </div>
+             </div>
+             </div>
+      </form>
+      <form id="order-summary" action="/website/yourorder/" method="post">
+         {% csrf_token %}
+         <input type="hidden" id="pick-up-address-id" name="pick-up-address-id" value="">
+         <input type="hidden" id="drop-address-id" name="drop-address-id" value="">
+         <input type="hidden" id="selected-service-type" name="selected-service-type" value="">
+         <input type="hidden" id="user_mobile_number" name="user_mobile_number" value="">
+      </form>
+      {% include 'include-add-address-pop-up.html' %}
+      {% include 'footer.html' %}
+      <!--<script src="/static/js/jquery-ui.min.js" type="text/javascript"></script>-->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      <script src="/static/js/script.js?ver=1"></script>
+      <script src="/static/js/jquery.validate.min.js"></script>
+      <script type="text/javascript" src="/static/js/confirmation.js"></script>
+
+      <script type="text/javascript">
+         function addMoreAddress(){
+         jQuery.noConflict();
+         	$(".emltd-password-change-pop-up").modal('show');
+         }
+         $('#add-pick-up-address').click(function(){
+         if($('#add-pick-up-address').is(':checked')){
+         	$('.drop-address-div').show();
+         }else{
+         	$('.drop-address-div').hide();
+         }
+         });
+         
+
+         
+      </script>
+   {% include 'footertags.html' %}
+   </body>
+</html>

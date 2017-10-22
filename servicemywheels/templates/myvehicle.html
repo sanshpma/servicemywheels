@@ -1,0 +1,15 @@
+{% include 'header.html' %}
+
+
+<div class="mainContentFooterArea">
+    <div class="mainContentWrapper" role="main">
+        <div class="mainContentSection popularObjectSection">
+            {% for obj in vehicle_objects %}
+            <b>{{obj.vehicle_type_make.vehicle_type}}</b>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% include 'footer.html' %}

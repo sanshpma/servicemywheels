@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<head>
+	{% include 'headtags.html' %}
+    {% include 'n_headtags.html' %}
+    <script src="/static/js/jquery-1.9.1.js"></script>
+	<style type="text/css">
+		#customer_div{
+			background-color: #fff;
+		}
+	</style>
+</head>
+<body class="page-md page-header-fixed page-sidebar-closed-hide-logo ">
+{% include 'header.html' %}
+<!-- BEGIN CONTAINER -->
+	<div class="page-container">
+        {% include 'left_menu.html' %}
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<!-- BEGIN PAGE HEADER-->
+				<!-- BEGIN PAGE HEAD -->
+				<div class="page-head">
+					<!-- BEGIN PAGE TITLE -->
+					<!-- END PAGE TITLE -->
+					<!-- BEGIN PAGE TOOLBAR -->
+
+					<!-- END PAGE TOOLBAR -->
+				</div>
+				<!-- END PAGE HEAD -->
+				<!-- BEGIN PAGE BREADCRUMB -->
+				<!-- END PAGE BREADCRUMB -->
+				<!-- END PAGE HEADER-->
+				<!-- BEGIN PAGE CONTENT-->
+				<div class="row">
+					<div class="col-md-12">
+					<!-- BEGIN SAMPLE TABLE PORTLET-->
+						<div style="margin-top:10px;" class="portlet box green">
+							<div class="portlet-title">
+								<div class="caption">
+									<i class="fa fa-table"></i>List of Orders
+								</div>
+							</div>
+							<div class="portlet-body flip-scroll">
+								<table class="table table-bordered table-striped table-condensed flip-content">
+									<thead class="flip-content">
+										<tr>
+											<th  >Id</th>
+											<th >Vehicle Type & Brand</th>
+											<th >Service Center</th>
+											<th >Status</th>
+											<th >Service Type</th>
+											<th>Generic Problem</th>
+										</tr>
+									</thead>
+									<tbody>
+                                    {% for obj in order_objects %}
+												<tr title="View Details" style="cursor: pointer;">
+													<td>{{obj.order_id}}</td>
+													<td>{{obj.customer_vehicle_type_make.vehicle_type}}-{{obj.customer_vehicle_type_make.vehicle_make}}</td>
+													<td>{{obj.service_center_id.service_center_address}}</td>
+                                                    <td>{{obj.status}}</td>
+													<td>{{obj.service_type}}</td>
+													<td>
+                                                        <div class="btn-group pull-right generic_problem_list" id="genericproblemlist_{{obj.order_id}}">
+                                                            <button style="margin-top:5px;" class="btn green btn-sm dropdown-toggle " type="button" data-toggle="dropdown">
+                                                                Generic Problem <i class="fa fa-angle-down"></i>
+                                                            </button>
+                                                            <input type="hidden" id="generic-problem-{{obj.order_id}}" value="{{obj.generic_problems_listed}}">
+                                                            <ul class="dropdown-menu" role="menu" id="gpdetails_{{obj.order_id}}">
+                                                            </ul>
+								                        </div>
+
+                                                    </td>
+												</tr>
+
+                                    {% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END PAGE CONTENT-->
+				<form id="customer_details_view" name="customer_details_view" method="post" action="view-Customer-details.html">
+					<input type="hidden" name="lead_member_id" id="lead-id"/>
+				</form>
+			</div>
+		</div>
+		<!-- END CONTENT -->
+	</div>
+	<!-- END CONTAINER -->
+	<!--<jsp:include page="/whitelabel/default_template/n_footer.jsp" />-->
+</body>
+{% include 'footer.html' %}
+<script type="text/javascript">
+    $('.generic_problem_list').click(function(){
+    var id=$(this).attr('id').split("_")[1];
+    var gpList=$('#generic-problem-'+id).val();
+    var array = new Array();
+    array=JSON.parse("[" + gpList + "]");
+    var gpArray=array.toString();
+    var final=gpArray.split(",");
+    $('#gpdetails_'+id).html("");
+    var html='';
+    for(var count=0;count<final.length;count++){
+        html=html+'<li>'+
+                    '<a href="javascript:;">'+final[count]+'</a>'+
+                  '</li>';
+    }
+    $('#gpdetails_'+id).append(html);
+    });
+</script>
+</html>

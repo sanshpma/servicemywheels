@@ -1,0 +1,152 @@
+<link href='http://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
+      <link href='http://fonts.googleapis.com/css?family=Philosopher' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="/static/css/login/style.css" />
+<link rel="stylesheet" href="/static/css/error-messages.css" />
+      <script src="/static/js/vendor/modernizr-2.6.2.min.js"></script>
+      <!--<script src="/static/js/vendor/jquery-1.10.2.min.js"></script>-->
+<!--<script src="/static/js/vendor/bootstrap.min.js"></script>-->
+<!--<form class="form-signin" id="login_form" name="loginForm" method="post" style="display:block;">-->
+<div class="modal fade emltd-new-patient-pop-up" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+       <div class="modal-content">
+
+          <div class="modal-header login_modal_header">
+              <button type="button" class="close mfp-close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h2 class="modal-title" id="myModalLabel">Login to Your Account</h2>
+          </div>
+          <div class="modal-body login-modal">
+             <br/>
+             <div class="clearfix"></div>
+             <div id='social-icons-conatainer'>
+                <div id="errorMsgDiv"  class="errorMessage" style="display:none;margin-right:15px;">
+                    <!--<img class="errorMessageImage" src="static/validationError.gif" />-->
+                    <div class="errorMessageTextContainer">
+                        <div class="field-container errorMessageText" style="color:#f00;" id="errorMsgDivText" ></div>
+                    </div>
+                </div>
+
+                 <form class="form-signin" id="login_form" name="loginForm" method="post" >
+                        {% csrf_token %}
+                {% load bootstrap %}
+                 <div class='modal-body-left a' style="display:block;">
+                    <div class="form-group">
+                        <input type="text"  placeholder="Enter your Email Id" name="email" value="" class="form-control login-field">
+                        <i class="fa fa-user login-field-icon"></i>
+                     </div>
+
+                     <div class="form-group">
+                        <input type="password"  placeholder="Password" name="password" value="" class="form-control login-field">
+                        <i class="fa fa-lock login-field-icon"></i>
+                         </div>
+
+                     <input type="submit" class="btn btn-success modal-login-btn" value="Login">
+                     <a href="#" class="login-link text-center forgot_password_btn">Forgot Password?</a>
+                 </div>
+                     </form>
+                 <form class="form-signin" id="signup_form" name="registerForm" method="post" >
+                        {% csrf_token %}
+                {% load bootstrap %}
+                      <div class='modal-body-left b' style="display:block;">
+                    <div class="form-group">
+                        <input type="text" placeholder="Enter your Name" name="customer_name" value="" class="form-control login-field">
+                        <i class="fa fa-user login-field-icon"></i>
+                     </div>
+                      <div class="form-group">
+                        <input type="text"  placeholder="Enter your Email" name="email" value="" class="form-control login-field">
+
+                        <i class="fa fa-user login-field-icon"></i>
+                     </div>
+
+                     <div class="form-group">
+                        <input type="password" placeholder="Password" name="password" value="" class="form-control login-field">
+                        <i class="fa fa-lock login-field-icon"></i>
+                     </div>
+
+                     <input type="submit" class="btn btn-success modal-login-btn" value="Sign Up">
+                 </div>
+</form>
+                 <form class="form-signin" id="guest_form" name="guestForm" method="post" style="display:none;">
+                        {% csrf_token %}
+                        {% load bootstrap %}
+                      <div class='modal-body-left c' style="display:block;">
+                    <div class="form-group">
+                        <input type="text" id="guset-name" placeholder="Enter your Name" name="customer_name" value="" class="form-control login-field">
+                        <i class="fa fa-user login-field-icon"></i>
+                     </div>
+                      <div class="form-group">
+                        <input type="email"  placeholder="Enter your Email" name="email" value="" class="form-control login-field">
+
+                        <i class="fa fa-user login-field-icon"></i>
+                     </div>
+                     <input type="submit" class="btn btn-success modal-login-btn" value="Continue As Guest">
+                 </div>
+</form>
+                 <form class="form-forgot-password" id="forgot_password_form" name="forgotpasswordForm" method="post" style="display:none;">
+                        {% csrf_token %}
+                        {% load bootstrap %}
+                      <div class='modal-body-left'>
+                      <div class="form-group">
+                        <input type="text"  placeholder="Enter your Mobile or Email" name="mail_mobile" value="" class="form-control login-field">
+                        <i class="fa fa-user login-field-icon"></i>
+                     </div>
+                     <input type="submit" class="btn btn-success modal-login-btn" value="Get Password">
+                 </div>
+</form>
+
+                 <form class="form-forgot-password" id="forgot_password_otp_form" name="forgotpasswordOtpForm" method="post" style="display:none;">
+                        {% csrf_token %}
+                        {% load bootstrap %}
+                      <div class='modal-body-left'>
+                      <div class="form-group">
+                        <input type="text"  placeholder="Enter your Otp" name="Otp" value="" class="form-control login-field">
+                        <i class="fa fa-user login-field-icon"></i>
+                     </div>
+                          <div class="form-group">
+                        <input type="password" placeholder="New Password" name="password" value="" class="form-control login-field">
+                        <i class="fa fa-lock login-field-icon"></i>
+                     </div>
+                     <input type="submit" class="btn btn-success modal-login-btn" value="Get Password">
+                 </div>
+</form>
+
+                 <div class='modal-body-right'>
+                    <div class="modal-social-icons">
+                       <span onclick="login()"class="btn btn-default facebook"> <i class="fa fa-facebook modal-icons"></i> Sign In with Facebook </span>
+                       <!--<a href='#' class="btn btn-default twitter"> <i class="fa fa-twitter modal-icons"></i> Sign In with Twitter </a>-->
+                       <span onclick = "render()" class="btn btn-default google"> <i class="fa fa-google-plus modal-icons"></i> Sign In with Google </span>
+                     <!--<span  id="social_buttons_google_signin" onclick="render()" class="btn btn-default google"> <i  class="fa fa-google-plus modal-icons"></i> Sign In with Google </span>-->
+                       <!--<a href='#' class="btn btn-default linkedin"> <i class="fa fa-linkedin modal-icons"></i> Sign In with Linkedin </a>-->
+                    </div>
+                 </div>
+                 <div id='center-line'> OR </div>
+              </div>
+              <div class="clearfix"></div>
+<div id="more-btn">
+              <div class="col-xs-6 modal-register-btn" style="margin-left: 30%;">
+                 <input type="button" class="btn btn-default register-btn" style="display:block;float:left;" value="Register">
+                  <input type="button" class="btn btn-default already-account-btn" style="display:none;float:left;margin-left:20px" value="Login">
+                  <input type="button" class="btn btn-default continue_as_guest-btn" style="display:block;float:left;margin-left: 20px;" value="Guest User">
+              </div>
+              <div class="form-group modal-register-btn">
+
+              </div>
+    </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="modal-footer login_modal_footer">
+          </div>
+       </div>
+   </div>
+   </div>
+    <!--</form>-->
+  <!--  <script src="/static/js/jquery.min.js" ></script>
+	<script src="/static/js/jquery-ui.min.js" type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+
+	<!--<script src="/static/js/jquery.selectBoxIt.min.js"-->
+		<!--type="text/javascript"></script>-->
+	<!-- <script src="http://malsup.github.com/jquery.form.js"></script> -->
+	<!--<script src="/static/js/jquery.form.js" type="text/javascript"></script>
+	<script src="/static/js/jquery.validate.min.js" type="text/javascript"></script>-->
+ <!--<script src="/static/js/jquery.magnific-popup.js"></script>
+        <script src="/static/js/login.js"></script>-->

@@ -1,0 +1,27 @@
+/*.echo-stats{
+	height:140px;
+}
+.bodyWrapper{
+	position: absolute;
+	padding:0px;
+	margin-top:660px;
+	overflow: hidden;
+	z-index:1;
+}*/
+.sideBar{
+	min-height:700px;
+}
+.welcomeDiv ul li{
+	display: inline;
+	vertical-align: middle;
+}
+.footerWrapper{
+	height:60px;
+	overflow:hidden;
+}
+.sectionWrapper{
+	/*overflow:hidden;*/
+}
+.mainContentArea{
+	overflow: hidden;
+}

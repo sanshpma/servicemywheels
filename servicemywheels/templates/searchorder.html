@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Service My Wheels</title>
+    <link rel="icon" type="image/png" href="/static/images/servicemywheels_logo_icon.ico"/>
+    <link rel="stylesheet" href="/static/css/home_style.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Engagement' rel='stylesheet' type='text/css'>
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"
+            charset="utf-8"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+</head>
+<body bgcolor="#E6E6FA">
+<article>
+    <img src="/static/images/servicemywheels_logo.jpg" id="logo">
+
+    <h1>Service My Wheels</h1>
+
+    <form action="/staff/searchorder/" method="post">
+        {% csrf_token %}
+         <div>
+            <input type="text" id="requested_order_id" name="requested_order_id" placeholder="Enter Order Number" style="margin-bottom:10px;">
+         </div>
+        <div>
+            <input type="submit" value="Get order details from Order Number"/>
+        </div>
+        <div>
+            <input type="text" id="requested_id" name="requested_id" placeholder="Enter Serial Number" style="margin-bottom:10px;">
+         </div>
+        <div>
+            <input type="submit" value="Get order details from Serial Number"/>
+        </div>
+        <div>
+            <input type="text" id="requested_phone_no" name="requested_phone_no" placeholder="Enter Registered Phone number" style="margin-bottom:10px;">
+         </div>
+        <div>
+            <input type="submit" value="Get order details from Serial Number"/>
+        </div>
+    </form>
+        <ul>
+            <li>
+                <div>
+                    ID:  {{order_obj.id}}
+                    <a href="/admin/core/order/{{order_obj.id}}" target="_blank">Get Details</a>
+                </div>
+            </li>
+            <!--<li>-->
+                <!--<label>Customer ID</label>-->
+                <!--<div>-->
+                    <!--{{order_obj.customer_id}}-->
+                <!--</div>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<label>Service Center ID</label>-->
+                <!--<div>-->
+                    <!--{{order_obj.service_center_id}}-->
+                <!--</div>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<label>Customer Vehicle Filled Details</label>-->
+                <!--<div>-->
+                <!--{{order_obj.customer_vehicle_type_make}}-->
+                <!--</div>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<label>Customer Vehicle More Details</label>-->
+                <!--<div>-->
+                <!--{{order_obj.customer_vehicle_id}}-->
+                <!--</div>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<label>Service Type</label>-->
+                <!--<div>-->
+                <!--{{order_obj.service_type}}-->
+                <!--</div>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<label>Specific Problems</label>-->
+                <!--<div>-->
+                <!--{{order_obj.specific_problems_listed}}-->
+                <!--</div>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<label>Generic Problems</label>-->
+                <!--<div>-->
+                <!--{{order_obj.generic_problems_listed}}-->
+                <!--</div>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<label>Customer Requested Pickup Time</label>-->
+                <!--<div>-->
+                <!--{{order_obj.customer_requested_pickup_time}}-->
+                <!--</div>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<label>Actual Pickup Time</label>-->
+                <!--<div>-->
+                <!--{{order_obj.actual_pickup_time}}-->
+                <!--</div>-->
+            <!--</li>-->
+            <!--<li>-->
+                <!--<label>Actual Pickup Time</label>-->
+                <!--<div>-->
+                <!--{{order_obj.actual_pickup_time}}-->
+                <!--</div>-->
+            <!--</li>-->
+        </ul>
+</article>
+</body>

@@ -1,0 +1,11 @@
+<script type="text/javascript">
+$(window).load(function(){
+	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+	}else if(screen.height <=800 && $('body').height() <= 681){
+		$('.emltdp-footer').addClass('adjust_footer_bottom');
+	}else if(screen.height >800 && $('body').height() <= 750){
+		$('.emltdp-footer').addClass('adjust_footer_bottom');
+	}
+	
+})
+</script>

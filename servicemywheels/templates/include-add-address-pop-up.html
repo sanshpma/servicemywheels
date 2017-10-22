@@ -1,0 +1,223 @@
+<style>
+<!--
+/* ------- add-address-pop-up satrt -------- */
+.emltd-doc-password-change-row {
+	margin-top : 2%;
+}
+
+.emltd-doc-password-change-row-content {
+	padding : 0px;
+}
+
+.emltd-doc-password-change-row-content-div {
+	padding-top : 2% !important;
+}
+
+.emltd-doctor-password-change-link {
+	color : #0581BD !important;
+	cursor : pointer;
+	text-shadow : 0px 0px 0.3px rgb(120, 120, 120);
+}
+
+.emltd-doc-password-change-row-content img {
+	cursor : pointer;
+}
+
+.emltd-doc-password-change-date {
+	font-size: 15px;
+	color: rgb(0, 0, 0);
+	text-shadow: 0px 0px 0.3px #787878;
+}
+
+.emltd-doc-password-change-name {
+	font-size : 14px;
+}
+
+.emltd-doc-password-change-no-link {
+	color: #787878;
+	text-shadow: 0.3px 0.4px 0.3px #787878;
+}
+
+.emltd-doc-password-change-folder {
+	padding : 2%;
+}
+
+.emltd-doc-password-change-new {
+	float : right;
+	cursor : pointer;
+}
+
+.emltd-doc-password-change-progress {
+	width :50px;
+}
+
+.emltd-modal-content-password-change {
+	width : 600px !important;
+}
+
+.emltd-modal-content-password-change-p1 {
+	color: #FFF200;
+	margin-bottom: 0px;
+}
+
+.emltd-modal-content-password-change-p2 {
+	font-size: 14px;
+}
+
+.emltd-doc-password-change-div-content {
+	padding-top : 3% !important;
+	padding-bottom : 0;
+	padding-left : 0;
+	padding-right : 0;
+}
+
+.emltd-doc-password-change-div-btn1 {
+	float: left;
+	background: none repeat scroll 0% 0% transparent;
+	border: medium none;
+	color: rgb(37, 115, 63);
+	cursor: pointer;
+	font-size: 15px;
+}
+
+.emltd-doc-password-change-div-btn2 {
+	float: right;
+	background: none repeat scroll 0% 0% transparent;
+	border: medium none;
+	color: transparent;
+	cursor: inherit;
+	font-size: 15px;
+}
+
+.emltd-doc-password-change-row-pad-bot {
+	padding-bottom : 2%;
+}
+
+#emltd-modal-content-rep {
+	margin-top : 8%;
+}
+
+.emltd-modal-content-rep-green {
+	height : 2px;
+	margin-top : 2%;
+	background : #37B97D;
+}
+
+.emltd-modal-content-rep-grey {
+	height : 2px;
+	margin-top : 2%;
+	background : #E3E3E3;
+}
+
+.emltd-doc-password-change-border {
+	border : 1px solid #C2C0C1;
+}
+
+.emltd-doc-password-change-calendar {
+	padding: 3%;
+	font-size: 12px;
+	color: #000;
+	text-shadow: 0px 0px 0.3px #787879;
+}
+
+.emltd-modal-content-rep-padding-five {
+	padding-top : 5%;
+}
+
+.emltd-modal-content-rep-dis {
+	display : flex;
+}
+
+/* ------- DOCTOR password-change ENDS -------- */
+
+/* ------- DOCTOR ADD password-change POP UP STARTS -------- */
+.emltd-password-change-pop-up .modal-dialog {
+	width: 400px;
+}	
+
+.emltdp-password-change-pop-up .modal-content {
+	border-radius: 0;
+}
+
+.emltd-password-change-pop-up .modal-footer{
+	text-align: center;
+	border: none;
+}
+.port-os-addr {
+  word-wrap: break-word;
+  color: #6D6E71;
+  line-height: 16px;
+}
+.add-new-address textarea{
+color: #000;
+  font-size: 12px;
+  font-family: arial;
+  padding: 6.5px;
+  height: 94px;
+  border: 1px solid #bababb;
+  -webkit-box-shadow: inset 0px 0px 2px 2px rgba(209,209,208,0.60);
+  -moz-box-shadow: inset 0px 0px 2px 2px rgba(209,209,208,0.60);
+  box-shadow: inset 0px 0px 2px 2px rgba(209,209,208,0.60);
+  width: 100%;
+  }
+/* ------- DOCTOR ADD password-change POP UP ENDS -------- */
+-->
+</style>
+<div class="modal fade emltd-password-change-pop-up" id="basicModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    	<form class="add-new-address" id="add-new-address" name="add-new-address" style="margin-bottom: 0em;" action="/users/saveaddress/" method="post">
+			 {% csrf_token %}
+			<input type="hidden" name="address_id" id="address_id" value="0">
+			<div class="col-sm-12 emltd-doc-password-change-row-content emltd-doc-password-change-row-pad-bot">
+				<div class="col-sm-12 emltd-profile-form-cols-header-div">
+					<div class="col-sm-6">
+						<p class="emltd-modal-content-password-change-p1">Add New Address</p>
+					</div>
+					<div class="col-sm-1">&nbsp;</div>
+					<div class="col-sm-5 emltd-doc-password-change-row-content">
+					</div>
+				</div>
+			</div> 
+			<div class="modal-content">
+				<div class="col-sm-12" style="margin-Top:4%">
+					<div class="col-sm-12">
+						<textarea name="address" id="address_line_1" required placeholder="Enter Your Address"></textarea>
+					</div>
+				</div>
+				<div class="col-sm-12" style="margin-Top:4%">
+					<div class="col-sm-12">
+						<select id="state" name="state">
+										<option value="Karnataka">Karnataka</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-sm-12" style="margin-Top:4%">
+					<div class="col-sm-12">
+						<select id="city" name="city">
+							<option value="Bangalore">Bangalore</option>
+						</select>
+					</div>
+				</div>
+				<!-- <div class="col-sm-12" style="margin-Top:4%">
+					<div class="col-sm-12">
+						<select id="locality" name="locality">
+							<option value="">Locality*</option>
+						</select>
+					</div>
+				</div> -->
+				<div class="col-sm-12" style="margin-Top:4%">
+					<div class="col-sm-12">
+						<input id="zip_code" type="text" name="pincode" required maxlength="6" placeholder="Zip Code">
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			 <div id="emltd-modal-content-rep" class="modal-footer emltd-profile-form-cols-header-div universal-shadow">
+        		<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        		<button type="submit" class="btn btn-primary add-edit-adr" >Add Address</button>
+        	</div>
+    	</form>
+     </div>
+  </div>
+</div>

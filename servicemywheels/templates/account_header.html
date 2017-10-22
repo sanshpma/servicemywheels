@@ -1,0 +1,241 @@
+<div class="popUp" id="editAccSettingsPopup">
+                <div class="popUpInnerWrapper">
+                    <div class="popupHeadingDiv">
+                        <h2>
+                            Account Settings
+                        </h2>
+                        <a href="" class="closeButton"><img src="{{ S3_URL }}img/close-button.png" alt="close"></a>
+                    </div>
+                    <form class="editSettingsForm" id="accountSettingsForm" action="{{ BASE_URL }}website/user-data/" method="POST">
+                        <div class="popupChildDiv popupContent">
+                            <table class="popupTable" id="editDetailsTable" cellspacing="0" cellpadding="0">
+                                <tr>
+                                    <td class="labelColoum">
+                                        Name:
+                                    </td>
+                                    <td class="inputColoum">
+                                        <input id="first_name" type="text" name="first_name" class="popupInputText" value="{{user_obj.first_name}}" />
+                                        <input id="hidden_name" type="hidden" name="hidden_name" value="{{user_obj.first_name}}"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="labelColoum">
+                                        Email:
+                                    </td>
+                                    <td class="inputColoum">
+                                        <input id="email" type="text" name="email" class="popupInputText" value="{{user_obj.email}}" />
+                                        <input id="hidden_email" type="hidden" name="hidden_email" value="{{user_obj.email}}"/>
+                                    </td>
+                                </tr>
+								<tr>
+                                    <td class="labelColoum">
+                                        Phone Number:
+                                    </td>
+                                    <td class="inputColoum">
+                                        <input id="phone" type="text" name="phone" class="popupInputText" value="{{user_obj.phone}}"/>
+										<input id="hidden_phone" type="hidden" name="hidden_phone" value=""/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="labelColoum">
+                                        Old Password:
+                                    </td>
+                                    <td class="inputColoum">
+                                        <input id="old_password" type="password" name="old_password" class="popupInputText"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="labelColoum">
+                                        New Password:
+                                    </td>
+                                    <td class="inputColoum">
+                                        <input id="new_password" type="password" name="new_password" class="popupInputText"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="labelColoum">
+                                        Confirm New Password:
+                                    </td>
+                                    <td class="inputColoum">
+                                        <input id="confirm_new_password" type="password" name="confirm_new_password" class="popupInputText"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
+                    <div class="errorDiv"></div>
+                    <div class="popupChildDiv submitPopupDiv borderNone">
+                        <input type="submit" value="Update" class="submit_btn blueGradient" id="submit_account_settings"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="headerWrapper">
+                <div class="sectionWrapper mainHeader">
+                    <div class="fleft logoDiv">
+                        <a href="/"><img src="{{ STATIC_URL }}images/servicemywheels_logo.jpg" alt=""/></a>
+                    </div>
+                    <div class="fright welcomeDiv">
+                        <ul>
+                            <li>{{user_obj.email}}</li>
+                            <li>
+                                <img src="{{ STATIC_URL }}images/user-profile-pic.png" alt="Username"/>
+                            </li>
+                            <li class="dropDownLink">
+                                <a href="" class="border-rad" id="showDropDownLink">
+                                    <img src="{{ STATIC_URL }}images/arrow-down.png" class="showDropDown"/>
+                                </a>
+                                <div class="accSettLogoutDiv">
+                                    <div><a href="/website/logout">Logout</a></div>
+                                    <div><a href="" class="accSettingsLink">Account Settings</a></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+            <div class="contentWrapper">
+                <div class="sectionWrapper">
+                    <div class="sideBar fleft" id="sideBar">
+                        <ul class="fright sideBarNav">
+                            {% if page == "profile" %}
+                            <li class="current">
+                                {% else %}
+                                <li class="">
+                            {% endif %}
+                                <a href="/dashboard/myprofile" class="summaryLink">
+                                    <span class="textSpan">My Profile</span>
+                                </a>
+                            </li>
+							{% if page == "order" %}
+                            <li class="current">
+                                {% else %}
+                                <li class="">
+                            {% endif %}
+                                <a href="/dashboard/myorder" class="summaryLink">
+                                    <span class="textSpan">My orders</span>
+                                </a>
+                            </li>
+                            {% if page == "vehicle" %}
+                            <li class="current">
+                                {% else %}
+                            <li class="">
+                            {% endif %}
+                                <a href="/dashboard/myvehicle" class="summaryLink">
+                                    <span class="textSpan">My Vehicles</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                <script type="text/javascript">
+			$(function(){
+                            $('.accSettingsLink').click(function(){
+                                $('html, body').animate({scrollTop:0}, 'slow');
+                                $('.popUpWrapper').fadeIn('fast');
+                                $('#editAccSettingsPopup').fadeIn('fast');
+                                return false;
+                            });
+
+                            $('.closeButton').click(function(){
+                                $('.validity-tooltip').remove();
+                                $('.popUpWrapper').fadeOut('fast');
+                                $('.popUp').fadeOut('fast');
+                                return false;
+                            });
+
+                            $('.cancel_btn').click(function(){
+                                $('.validity-tooltip').remove();
+                                $('.popUpWrapper').fadeOut('fast');
+                                $('.popUp').fadeOut('fast');
+                                return false;
+                            });
+
+                            $(document).bind('keydown', function(e) {
+                                if (e.which == 27) {
+                                    $('.popUpWrapper').fadeOut('fast');
+                                    $('.popUp').fadeOut('fast');
+                                }
+			    });
+
+                            function validateAccountSettingsForm() {
+                                // Start validation:
+                                $.validity.start();
+
+                                // Validator methods go here:
+                                $('#email').require().match('email');
+                                if($.trim($('#old_password').val()) != ''){
+                                    $('#new_password').require();
+                                    $('.password').equal('Passwords do not match.');
+                                }
+
+                                // etc.
+
+                                // All of the validator methods have been called:
+                                // End the validation session:
+                                var result = $.validity.end();
+
+                                // Return whether it's okay to proceed with the Ajax:
+                                return result.valid;
+                            }
+
+                            $('#submit_account_settings').click(function(){
+                                $('.errorDiv').html('');
+                                if(validateAccountSettingsForm()){
+                                    var data = $('#accountSettingsForm').serialize();
+                                    //alert(data);
+                                    var url = '{{ BASE_URL }}website/user-data/';
+                                    type = 'POST';
+                                    var csrf = '{{csrf_token}}';
+                                    $.ajax({
+                                        type: type,
+                                        url: url,
+                                        dataType: "json",
+                                        headers: {'X-CSRFToken' : csrf },
+                                        data: data,
+                                        success: function(responseObj) {
+                                        var html = '';
+                                        if(responseObj.status == '0'){
+                                            html += responseObj.message;
+                                            $('.errorDiv').html(html);
+                                            if(html != ''){
+                                                $('#editAccSettingsPopup').unmask();
+                                                return false;
+                                            } else {
+                                                $('#accountSettingsForm').submit();
+                                            }
+                                        }
+                                        alert('Successfully Updated');
+                                        window.location.reload();
+                                        },
+                                        error: function () {
+                                            alert("failure");
+                                        }
+                                    });
+                                    //$('#editAccSettingsPopup').mask("Please Wait...");
+                                    /*
+                                    $.post(url, data, function(response){
+                                        var responseObj = $.parseJSON(response);
+                                        var html = '';
+                                        if(responseObj.email_status == '0'){
+                                            html += 'Email entered is already in use.';
+                                        }
+                                        if(responseObj.password_status == '0'){
+                                            html += '<br/>Old password entered is incorrect.'
+                                        }
+                                        $('.errorDiv').html(html);
+                                        if(html != ''){
+                                            $('#editAccSettingsPopup').unmask();
+                                            return false;
+                                        } else {
+                                            $('#accountSettingsForm').submit();
+                                        }
+                                    });
+                                    */
+                                }
+                                return false;
+                            });
+			});
+		</script>

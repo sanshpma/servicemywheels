@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<head>
+	{% include 'headtags.html' %}
+    {% include 'n_headtags.html' %}
+	<script src="/static/js/jquery-1.9.1.js"></script>
+	<style type="text/css">
+		#customer_div{
+			background-color: #fff;
+		}
+	</style>
+</head>
+<body class="page-md page-header-fixed page-sidebar-closed-hide-logo ">
+{% include 'header.html' %}
+<!-- BEGIN CONTAINER -->
+	<div class="page-container">
+        {% include 'left_menu.html' %}
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<!-- BEGIN PAGE HEADER-->
+				<!-- BEGIN PAGE HEAD -->
+				<div class="page-head">
+					<!-- BEGIN PAGE TITLE -->
+					<!-- END PAGE TITLE -->
+					<!-- BEGIN PAGE TOOLBAR -->
+
+					<!-- END PAGE TOOLBAR -->
+				</div>
+				<!-- END PAGE HEAD -->
+				<!-- BEGIN PAGE BREADCRUMB -->
+				<!-- END PAGE BREADCRUMB -->
+				<!-- END PAGE HEADER-->
+				<!-- BEGIN PAGE CONTENT-->
+				<div class="row" id="search_result_div"></div>
+				<div class="row">
+					<div class="col-md-12">
+					<!-- BEGIN SAMPLE TABLE PORTLET-->
+						<div class="portlet box green">
+							<div class="portlet-title">
+								<div class="caption">
+									<i class="fa fa-table"></i>My Profile
+								</div>
+							</div>
+							<div class="portlet-body flip-scroll">
+								<!--<table class="table table-bordered table-striped table-condensed flip-content">-->
+								                  <div class="service-my-wheels-form-half-box service-my-wheels-form-full-width">
+                     <div id="general-details-filled"
+                        class="service-my-wheels-form-1-filled">
+                        <div class="row">
+                           <div class="col-xs-12 service-my-wheels-form-1-filled-basic">
+                              <div class="row">
+                                 <div class="col-sm-12 service-my-wheels-form-1-filled-basic-l">
+                                    <div class="row">
+                                       <div class="col-xs-3"><span>Name :</span></div>
+                                       <div class="col-xs-6 breakWord" style="margin-left:40px;">{{name}}</div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="col-sm-12 service-my-wheels-form-1-filled-basic-l">
+                                    <div class="row">
+                                       <div class="col-xs-3"><span>User Id :</span></div>
+                                       <div class="col-xs-6" style="margin-left:40px;">{{id}}</div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="row">
+                                 <div class="col-sm-12 service-my-wheels-form-1-filled-basic-l">
+                                    <div class="row">
+                                       <div class="col-xs-3"><span>Email Id:</span></div>
+                                       <div class="col-xs-6 breakWord" style="margin-left:40px;">{{email}}</div>
+                                    </div>
+                                 </div>
+                              </div>
+							   <div class="row">
+                                 <div class="col-sm-12 service-my-wheels-form-1-filled-basic-l">
+                                    <div class="row">
+                                       <div class="col-xs-3"><span>Mobile No:</span></div>
+                                       <div class="col-xs-6 breakWord" style="margin-left:40px;">{{mobileNo}}</div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+								<!--</table>-->
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- END PAGE CONTENT-->
+				<form id="customer_details_view" name="customer_details_view" method="post" action="view-Customer-details.html">
+					<input type="hidden" name="lead_member_id" id="lead-id"/>
+				</form>
+			</div>
+		</div>
+		<!-- END CONTENT -->
+	</div>
+	<!-- END CONTAINER -->
+	<!--<jsp:include page="/whitelabel/default_template/n_footer.jsp" />-->
+{% include 'footer.html' %}
+</body>
+
+<script type="text/javascript">
+</script>
+</html>

@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="en">
+{% include 'base.html' %}
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="/static/images/servicemywheels_logo_icon.ico"/>
+    <link rel="stylesheet" href="/static/css/home_style.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Engagement' rel='stylesheet' type='text/css'>
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"
+            charset="utf-8"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+</head>
+<style>
+    body {
+    background-color: #d0e4fe;
+}
+</style>
+<body bgcolor="#E6E6FA">
+<article>
+
+
+    <h1>Service My Wheels</h1>
+            {% if user.is_authenticated %}
+            <input type="hidden" value="Loggedin" id="checklogin"/>
+            {% endif %}
+            {% if not user.is_authenticated %}
+            <input type="hidden" value="NotLoggedin" id="checklogin"/>
+            {% endif %}
+    <form action="/website/booking/" id="bookingForm" method="post">
+        {% csrf_token %}
+
+        <ul>
+            <li>
+                <label for="vehicleType">Your Vehicle is a Car/Bike:</label>
+                <Select id="vehicle" name="vehicle_type">
+                    <option val="Select">Select Vehicle Type</option>
+                    {% for obj in vehicle %}
+                    <option val="{{ obj }}" {{ obj }}>{{ obj }}</option>
+                    {% endfor %}
+                </Select>
+            </li>
+            <li>
+                <label for="brand">Your Vehicle Brand(Make):</label>
+                <Select id="make" name="brand">
+                    <option val="Select">Select</option>
+                </Select>
+            </li>
+            <li>
+                <label for="loc">Service Center Location :</label>
+                <Select id="location" name="location">
+                </Select>
+            </li>
+            <li>
+                <label for="genericProblems">Generic Problems :</label>
+                <div class="checkbox" id="generic_problem" style="width:375px; float:right;">
+                </div>
+            </li>
+            <li>
+                <label for="specificProblems">Specific Problems:</label>
+                <textarea cols="50" rows="5" name="specificProblems" id="specificProblems"></textarea>
+            </li>
+            <li>
+                <label for="serviceType">Service Type:</label>
+                <input type="radio" name="serviceType" value="Paid" id="serviceTypePaid">Paid
+                <input type="radio" name="serviceType" value="Free" id="serviceTypeFree">Free
+            </li>
+            <li>
+                <label for="pickupTime">Pick-up Time:</label>
+                <input type="text" required="" class="form-control" name="pickup_time" id="datetimepicker12">
+            </li>
+        </ul>
+        <p>
+            <input type="submit" value="Book My Service" id="book"/>
+            <input type="reset" value="Reset My Details"/>
+        </p>
+    </form>
+    <input type="hidden" name="bike_make_list" id="bike_make_list" value='{{bike}}'>
+    <input type="hidden" name="car_make_list" id="car_make_list" value='{{car}}'>
+    <input type="hidden" name="service_center_list" id="service_center_list" value='{{service_center}}'>
+    <input type="hidden" name="generic_problem_list" id="generic_problem_list" value='{{generic_problems}}'>
+    <input type="hidden" name="selected_vehicle_type" id="selected_vehicle_type" value='{{selected_vehicle_type}}'>
+    <input type="hidden" name="selected_brand" id="selected_brand" value='{{selected_brand}}'>
+    <input type="hidden" name="selected_specific_problems_listed" id="selected_specific_problems_listed" value='{{selected_specific_problems_listed}}'>
+    <input type="hidden" name="selected_service_center_address" id="selected_service_center_address" value='{{selected_service_center_address}}'>
+    <input type="hidden" name="selected_pickuptime" id="selected_pickuptime" value='{{pickup_time}}'>
+    <input type="hidden" name="selected_service_type" id="selected_service_type" value='{{selected_service_type}}'>
+    <input type="hidden" name="selected_generic_problems_listed" id="selected_generic_problems_listed"  value='{{selected_generic_problems}}'>
+</article>
+</body>
+</html>
+<.
+<script src="/static/js/jquery.datetimepicker.js"></script>
+<link rel="stylesheet" property="stylesheet" href="/static/css/jquery.datetimepicker.css" type="text/css" media="all">
+<script type="text/javascript">
+    $(function() {
+    $('#datetimepicker12').datetimepicker({
+        step: 30,
+        minDate: 0,
+        format: 'Y-m-d H:i'
+    });
+});
+</script>
+<script type="text/javascript" src="/static/js/home.js">
+</script>
+<script>
+    <script language="JavaScript" type="text/javascript">
+<!--
+function checkform ( form )
+{
+  if (form.email.value == "") {
+    alert( "Please enter your email address." );
+    form.email.focus();
+    return false ;
+  }
+  return true ;
+}
+</script>
+</script>
+</html>

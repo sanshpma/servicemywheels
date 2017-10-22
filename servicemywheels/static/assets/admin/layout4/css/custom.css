@@ -1,0 +1,274 @@
+/* GLOBAL STARTS */
+.validate label.error{
+	display: inline;
+}
+
+.validate .error.red, .validate label.error{
+	color: #F3565D;
+	font-size: 13px;
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  background: red;
+  cursor: inherit;
+  display: block;
+}
+.file-up-text {
+  background-color: white !important;
+  cursor: text !important;
+}
+
+.gradeX a:hover{
+	text-decoration: none;
+}
+
+/*.paginate_button.prev a, .paginate_button.next a, .paginate_button.disabled a{
+	padding: 7.5px 12px;
+}*/
+
+.task-list {
+    list-style: outside none none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.task-list > li {
+    position: relative;
+    padding: 6px 0px;
+    border-bottom: 1px solid #F4F6F9;
+}
+
+.task-list > li > .task-title {
+    color: #838FA1;
+    margin-right: 10px;
+}
+
+ .task-list > li > .task-title .task-title-sp {
+    margin-right: 5px;
+}
+
+.img-polaroid {
+    padding: 4px;
+    background-color: #FFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.chosen-container{
+  width: 100% !important;
+}
+
+.summerfont-sm .note-toolbar .btn-small{
+	font-size: 8px;
+	padding: 2px 10px;
+}
+
+/* GLOBAL ENDS */
+
+.control-label-small .control-label{
+	font-size: 12px !important;
+}
+
+.remove-ic{
+	background-image: url("../img/portlet-remove-icon-white.png");
+	width: 11px;
+}
+
+.remove-ic:hover{
+	text-decoration: none;
+	transition: all 0.1s ease-in-out 0s;
+	opacity: 0.8;
+}
+
+.kapture-search .input-group{
+	width: 86%;
+}
+
+.kapture-search .checkbox-list{
+	float: right;
+	margin-top: 6px;
+}
+
+/* CUSTOMER - ADD MORE CONTACT STARTS  */
+
+.customer-amc .modal-header{
+	padding: 0;
+}
+
+.customer-amc .portlet{
+	box-shadow: none;
+	margin: 0;
+}
+
+.customer-amc .fa-book{
+	font-size: 18px !important;
+}
+
+.customer-amc-h{
+	background-color: #F3B796;
+	padding: 5px;
+	margin-bottom: 15px;
+}
+
+.customer-amc-h ul{
+	margin-bottom: 0;
+}
+
+.customer-amc-h ul li{
+	color: #fff;
+	margin-bottom: 0;
+}
+
+.customer-amc .modal-footer{
+	padding: 0;
+}
+
+/* CUSTOMER - ADD MORE CONTACT ENDS  */
+
+/* CUSTOMER DETAIL - STARTS  */
+
+.cust-detail-table tr th{
+	font-size: 12px !important;
+}
+
+/* CUSTOMER DETAILS - ENDS  */
+
+/* ADD ENQUIRY - STARTS  */
+
+.kap-add-enquiry > li{
+	padding: 5px 0px !important;
+}
+
+ .kap-add-enquiry-details .portlet-title > .caption{
+		padding: 0 !important;
+ }
+	
+ .kap-add-enquiry-details .portlet-title{
+		min-height: auto !important;
+ }
+
+
+.kap-add-enquiry-num{
+	margin: 0;
+	background-color: #fff;
+	margin-bottom: 25px;
+	box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.22);
+}
+
+.kap-add-enquiry-port .portlet{
+	margin-bottom: 10px;
+}
+
+/* ADD ENQUIRY - ENDS  */
+
+/* EMPLOYEE DESIGNATION - STARTS */
+
+.kap-ed-add span{
+	font-size: 22px;
+	padding-top: 5px;
+	color: #999;
+	cursor: pointer;
+}
+
+label[for="lead_with_status"]{
+	padding-left: 0 !important;
+}
+
+/* EMPLOYEE DESIGNATION - ENDS */
+
+/* EMPLOYEE LEAVE - STARTS */
+
+.emp_leave_action span{
+	cursor: pointer;
+	margin-right: 10px;
+}
+
+/* EMPLOYEE LEAVE - ENDS */
+
+/* UPDATE DAILY PLAN - STARTS */
+
+#udp-carousel .carousel-control.right, #udp-carousel .carousel-control.left{
+	background: none;
+}
+
+#udp-carousel .carousel-control{
+	text-shadow: none;
+	width: auto;
+	top:35%;
+}
+
+#udp-carousel .fa{
+	color: #000;
+}
+
+#udp-carousel{
+	padding: 0 20px 15px 20px;
+}
+
+.udp-pd i.fa{
+	font-size: 18px;
+	margin-left: 5px;
+	color: #00AFD4;
+}
+
+/* UPDATE DAILY PLAN - ENDS */
+
+
+/* CREATE DAILY PLAN STARTS  */
+
+.kap-ndp-list .panel-default{
+	box-shadow: none;
+	border: 1px solid #F9F9F9;
+}
+
+.kap-ndp-list-parent{
+	margin-top: 20px;
+}
+
+.add-cust, .remove-cust{
+	width: 10%;
+}
+
+.kap-ndp-list-left{
+	padding: 0;
+}
+
+.kap-ndp-list-left .btn-sm{
+	margin: 3px 3px 0 0;
+}
+
+.kap-ndp-list-left h3{
+	display: inline-block;
+	padding: 10px 0 10px 15px;
+}
+
+/* CREATE DAILY PLAN ENDS  */
+
+/* OLD THEME STYLE - STARTS */
+
+._25{
+	width:25%;
+	float:left;
+	display: inline;
+}
+
+._75{
+	width:71%;
+	float:left;
+	display: inline;
+}
+
+
+/* OLD THEME STYLE - ENDS */

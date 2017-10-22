@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% include 'base.html' %}
+        <style>
+            .form-signup {
+            max-width: 500px;
+            padding: 5px;
+        }
+            .white-popup {
+            position: relative;
+            background: #FFF;
+            padding: 20px;
+            width: auto;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        </style>
+        <link rel="stylesheet" href="/static/css/magnific-popup.css">
+    </head>
+    <body>
+        <div>
+            {% if registered %}
+            <strong>Thank you for registering!</strong>
+            <a href="/">Return to the homepage.</a><br/>
+
+            {% else %}
+            {% csrf_token %}
+            {% load bootstrap %}
+            <div id="signUp" class="white-popup mfp-hide">
+                <div class="container ">
+                    <form class="form-signup" id="signup-form" method="post" action="/auth/signup/">
+                        {% csrf_token %}
+                        {% load bootstrap %}
+                        <h2 class="form-signin-heading"><a href="#signUp" class="open-signUp-link">SignUp</a></h2>
+                        <br>
+                        <input type="text" name="customer_name" class="form-control" placeholder="Full Name" value="" required
+                               autofocus>
+                        <br>
+                        <input type="email" name="email" class="form-control" placeholder="Email" value="" required>
+                        <br>
+                        <input type="password" name="password" class="form-control" placeholder="Password" value="" required>
+                        <br>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+                        <!--<input type="hidden" name="submit" value="submit"/>-->
+                    </form>
+                </div>
+            </div>
+
+            <script src="/static/js/jquery.magnific-popup.js"></script>
+            <script>
+                $('.open-signUp-link').magnificPopup({
+                  type:'inline',
+                  midClick: true // Allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source in href.
+                });
+                document.getElementsByClassName("open-signUp-link")[0].click();
+            </script>
+            {% endif %}
+        </div>
+    </body>
+</html>
+

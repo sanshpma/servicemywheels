@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Service My Wheels</title>
+    <link rel="icon" type="image/png" href="/static/images/servicemywheels_logo_icon.ico"/>
+    <link rel="stylesheet" href="/static/css/home_style.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Engagement' rel='stylesheet' type='text/css'>
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"
+            charset="utf-8"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+
+</head>
+<body bgcolor="#E6E6FA">
+<article>
+    <img src="/static/images/servicemywheels_logo.jpg" id="logo">
+
+    <h1>Service My Wheels</h1>
+
+    <form action="/staff/newOrderNotification/" method="post">
+        {% csrf_token %}
+         <p>
+            <input type="submit" value="Get orders Info"/>
+        </p>
+    </form>
+        <ul>
+            <li>
+                <label for="waitingforcrewmemberassignment">Orders waiting for pickup crew member assignment :</label>
+                <label>Order IDs</label>
+                <div>
+                    {% for obj in order_waiting_for_pickup_crewMemberAssignment %}
+                    {{obj.id}} ,
+                    {% endfor %}
+                </div>
+            </li>
+
+            <li>
+                <label for="waitingForServiceCenterAssignment">Orders waiting for Service Center assignment :</label>
+                <label>Order IDs</label>
+                <div>
+                    {% for obj in order_waiting_for_serviceCenterAssignment %}
+                    {{obj.id}} ,
+                    {% endfor %}
+                </div>
+            </li>
+
+            <li>
+                <label for="waitingforcrewmemberassignment">Orders waiting for drop crew member assignment :</label>
+                <label>Order IDs</label>
+                <div>
+                    {% for obj in order_waiting_for_drop_crewMemberAssignment %}
+                    {{obj.id}} ,
+                    {% endfor %}
+                </div>
+            </li>
+        </ul>
+</article>
+</body>

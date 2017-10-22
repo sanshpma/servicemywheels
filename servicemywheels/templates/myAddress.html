@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<head>
+	{% include 'headtags.html' %}
+    {% include 'n_headtags.html' %}
+    <script src="/static/js/jquery-1.9.1.js"></script>
+	<style type="text/css">
+		#customer_div{
+			background-color: #fff;
+		}
+	</style>
+</head>
+<body class="page-md page-header-fixed page-sidebar-closed-hide-logo ">
+{% include 'header.html' %}
+<!-- BEGIN CONTAINER -->
+	<div class="page-container">
+        {% include 'left_menu.html' %}
+		<!-- BEGIN CONTENT -->
+		<div class="page-content-wrapper">
+			<div class="page-content">
+				<!-- BEGIN PAGE HEADER-->
+				<!-- BEGIN PAGE HEAD -->
+				<div class="page-head">
+					<!-- BEGIN PAGE TITLE -->
+					<div class="page-title">
+						<h1>All Partner</h1>
+					</div>
+					<!-- END PAGE TITLE -->
+					<!-- BEGIN PAGE TOOLBAR -->
+
+					<!-- END PAGE TOOLBAR -->
+				</div>
+				<!-- END PAGE HEAD -->
+				<!-- BEGIN PAGE BREADCRUMB -->
+				<ul class="page-breadcrumb breadcrumb">
+					<li>
+						<a href="home.html">Home</a>
+						<i class="fa fa-circle"></i>
+					</li>
+					<li>
+						<a href="#">nikesh</a>
+						<i class="fa fa-circle"></i>
+					</li>
+					<li>
+						<a href="#">All mukesh</a>
+					</li>
+				</ul>
+				<!-- END PAGE BREADCRUMB -->
+				<!-- END PAGE HEADER-->
+				<!-- BEGIN PAGE CONTENT-->
+				<div class="row kapture-search">
+					<div class="col-md-12">
+						<form action="#" class="alert alert-success alert-borderless">
+							<div class="input-group pull-left">
+								<div class="input-cont">
+									<input placeholder="Search..." class="form-control" type="text" name="search_param" id="search_param">
+								</div>
+								<span class="input-group-btn">
+								<button type="button" class="btn green-haze" onclick="searchFunc();" id="search_button">
+								Search &nbsp; <i class="m-icon-swapright m-icon-white"></i>
+								</button>
+								</span>
+
+							</div>
+							<span class="checkbox-list">
+								<label class="checkbox-inline">
+								<input type="checkbox" name="checkbox_for_id" id="checkbox_for_id" value=""> 120 ID</label>
+							</span>
+							<div class="clearfix"></div>
+						</form>
+						<form id="search_result_form" method="post" action="lead-member.html" class="validate">
+							<input type="hidden" name="enquiry_check" id="enquiry_check" value="addEnquiry" />
+							<input> type="hidden" name="lead_member_id" id="lead_member_id_search" value="">
+						</form>
+					</div>
+				</div>
+				<div class="row" id="search_result_div"></div>
+				<div class="row">
+					<div class="col-md-12">
+					<!-- BEGIN SAMPLE TABLE PORTLET-->
+						<div style="margin-top:10px;" class="portlet box green">
+							<div class="portlet-title">
+								<div class="caption">
+									<i class="fa fa-table"></i>List of Customers
+								</div>
+								<div class="btn-group pull-right">
+									<button style="margin-top:5px;" class="btn green btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+										Choose Type <i class="fa fa-angle-down"></i>
+									</button>
+									<ul class="dropdown-menu" role="menu">
+										<li>
+											<a href="javascript:;">
+											Customer </a>
+										</li>
+										<li>
+											<a href="javascript:;">
+											Individual </a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="portlet-body flip-scroll">
+								<table class="table table-bordered table-striped table-condensed flip-content">
+									<thead class="flip-content">
+										<tr>
+											<th>S.L No.</th>
+											<th  >Id</th>
+											<th >Booking Date</th>
+											<th >Name</th>
+											<th >Board Line Number</th>
+											<th >Website</th>
+											<th>City</th>
+											<th>Locality</th>
+										</tr>
+									</thead>
+									<tbody>
+												<tr title="View Details" style="cursor: pointer;">
+													<td></td>
+													<td ></td>
+													<td> </td>
+													<td>  </td>
+
+													<td></td>
+													<td ></td>
+													<td></td>
+													<td></td>
+												</tr>
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+					<div id="name_wise_div">
+
+								<div class="row">
+									<div class="col-md-12">
+										<div class="btn-group btn-group-solid">
+
+												<button type="button" class="btn dark all_btn" name="alphabetsBtn" id=""></button>
+										        <button type="button" class="btn dark all_btn" name="alphabetsBtn" id="btn_">0-9</button>
+										        <button type="button" class="btn dark" style="padding-left: 0px;" id="btn_display">Show Alls</button>
+										</div>
+										<!-- BEGIN SAMPLE TABLE PORTLET-->
+										<div style="margin-top:10px;" class="portlet box green">
+											<div class="portlet-title">
+												<div class="caption">
+													<i class="fa fa-table"></i>
+												</div>
+												<div class="btn-group pull-right">
+													<button style="margin-top:5px;" class="btn green btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+														Choose Type <i class="fa fa-angle-down"></i>
+													</button>
+													<ul class="dropdown-menu" role="menu">
+														<li>
+															<a href="javascript:;">
+															Customer </a>
+														</li>
+														<li>
+															<a href="javascript:;">
+															Individual </a>
+														</li>
+													</ul>
+												</div>
+											</div>
+											<div class="portlet-title">
+												<div class="caption">
+													<i class="fa fa-table"></i>Level
+												</div>
+												<div class="btn-group pull-right">
+													<button style="margin-top:5px;" class="btn green btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+														Choose Type <i class="fa fa-angle-down"></i>
+													</button>
+													<ul class="dropdown-menu" role="menu">
+														<li>
+															<a href="javascript:;">
+															Customer </a>
+														</li>
+														<li>
+															<a href="javascript:;">
+															Individual </a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										<div class="portlet-body flip-scroll">
+											<div id="customer_div_"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+	             	</div>
+				<!-- END PAGE CONTENT-->
+				<form id="customer_details_view" name="customer_details_view" method="post" action="view-Customer-details.html">
+					<input type="hidden" name="lead_member_id" id="lead-id"/>
+				</form>
+			</div>
+		</div>
+		<!-- END CONTENT -->
+	</div>
+	<!-- END CONTAINER -->
+	<!--<jsp:include page="/whitelabel/default_template/n_footer.jsp" />-->
+</body>
+<!--{% include 'footer.html' %}-->
+<script type="text/javascript">
+</script>
+</html>

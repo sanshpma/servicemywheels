@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/static/css/login.css">
+        <link rel="stylesheet" href="/static/css/magnific-popup.css">
+         <!--<script src = "https://plus.google.com/js/client:plusone.js"></script>-->
+      <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
+        <script src="https://apis.google.com/js/client:platform.js" async defer></script>
+    </head>
+    <body>
+        <div id="signIn" class="white-popup mfp-hide">
+            <img id="company_logo" src="/static/images/servicemywheels_logo.jpg">
+            <a id="social_buttons" class="btn btn-block btn-social btn-facebook"
+               href="http://localhost:8000/auth/facebook_login/">
+                <i class="fa fa-facebook"></i>
+                Sign in with Facebook
+            </a>
+            <!--<a id="social_buttons_google_signin" class="btn btn-block btn-social btn-google"-->
+               <!--href="http://localhost:8000/auth/google_login/">-->
+                <!--<i class="fa fa-google"></i>-->
+                <!--Sign in with Google+-->
+            <!--</a>-->
+
+            <button type="button" id="social_buttons_google_signin" class="btn btn-block btn-social btn-google">
+                    <i class="fa fa-google"></i>
+                      Sign in with Google+
+                    </button>
+
+            <!--<div  class="button">-->
+     <!--<button class="g-signin" id="social_buttons_google_signin"-->
+          <!--&lt;!&ndash;data-scope="email"&ndash;&gt;-->
+          <!--&lt;!&ndash;data-clientid="284988950964-apssq2cr5dj96mfr51soudedfr68sffd.apps.googleusercontent.com"&ndash;&gt;-->
+          <!--&lt;!&ndash;data-callback="onSignInCallback"&ndash;&gt;-->
+          <!--&lt;!&ndash;data-theme="dark"&ndash;&gt;-->
+          <!--&lt;!&ndash;data-cookiepolicy="single_host_origin">&ndash;&gt;-->
+      <!--</button>-->
+      <!--&lt;!&ndash; Textarea for outputting data &ndash;&gt;-->
+      <!--<div id="response" class="hide">-->
+        <!--&lt;!&ndash;<textarea id="responseContainer" style="width:100%; height:150px"></textarea>&ndash;&gt;-->
+      <!--</div>-->
+    <!--</div>-->
+
+            <br>
+            <form class="form-signin" id="login_form" name="loginForm" method="post" >
+                {% csrf_token %}
+                {% load bootstrap %}
+                <br><hr><h1>Login</h1><br>
+                <input type="email" name="email" class="form-control" placeholder="Email" value="" required autofocus/><br>
+                <input type="password" name="password" class="form-control" placeholder="Password" value="" required/><br>
+                <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign in"/>
+                <input type="hidden" name="submit" value="submit"/><br>
+                <h2>Don't have an account?<a href="#signUp" class="open-signUp-link">Sign Up</a></h2>
+            </form>
+        </div>
+        <div id="signUp" class="white-popup mfp-hide">
+            <img id="company_logo" src="/static/images/servicemywheels_logo.jpg">
+            <a id="social_buttons" class="btn btn-block btn-social btn-facebook"
+               href="http://localhost:8000/auth/facebook_login/">
+                <i class="fa fa-facebook"></i>
+                Sign in with Facebook
+            </a>
+
+            <!--<a id="social_buttons_google_signup" class="btn btn-block btn-social btn-google"-->
+               <!--href="http://localhost:8000/auth/google_login/">-->
+                <!--<i class="fa fa-google"></i>-->
+                <!--Sign in with Google+-->
+            <!--</a>-->
+
+            <button type="button" id="social_buttons_google_signup" class="btn btn-block btn-social btn-google">
+                    <i class="fa fa-google"></i>
+                      Sign in with Google+
+                    </button>
+
+            <br>
+            <form  class="form-signup" id="signup-form" method="post" name="registerForm" >
+                {% csrf_token %}
+                {% load bootstrap %}
+                <h1>Register</h1><br>
+                <input type="text" name="customer_name" class="form-control" placeholder="Full Name" value="" required
+                       autofocus><br>
+                <input type="email" name="email" class="form-control" placeholder="Email" value="" required><br>
+                <input type="password" name="password" class="form-control" placeholder="Password" value="" required><br>
+                <button id ="signup-button" class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+                <input type="hidden" name="submit" value="submit"/><br>
+                <h2>Already signed up?<a href="#signIn" class="open-signIn-link">Login</a><h2>
+            </form>
+        </div>
+
+        <a href="#signIn" class="open-signIn-link"></a>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="/static/js/jquery.magnific-popup.js"></script>
+        <script src="/static/js/login.js"></script>
+
+        <!--<script src = "https://plus.google.com/js/client:plusone.js"></script>-->
+    </body>
+
+
+</html>

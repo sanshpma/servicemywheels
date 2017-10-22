@@ -1,0 +1,30 @@
+<html>
+    <body>
+    <h4>Dear {{customer_mail_id}}</h4>
+<tr>
+             <td style="font-size:17px;font-weight:bold;padding:25px 25px" align="center">
+                 <span style="font-size:37px">Service <span style="color:#ff8800"> Your</span> Vehicle.</span><br>High quality service of Vehicle!
+             </td>
+</tr>
+<tr>
+    <td style="padding:10px 10px 20px 10px">
+        <br>
+        <div>Thank you for placing request for our service. One of our experts will confirm your order and attend to your request as soon as possible.</div>
+    </td>
+</tr>
+    <tr>
+        <td style="padding:10px 10px 20px 10px">
+            <div>Please use this orderId <b>{{order_id}}</b> for further communication.</div>
+              </td>
+            </tr>
+<tr>
+              <td bgcolor="#eefcfb" style="padding:15px 15px">
+              <div style="font-size:19px;padding-bottom:10px">Request details:</div>
+              <div style="padding-bottom:10px"><strong>Pick Up Address: </strong>{{customer_pickup_adddress}}<br><br>
+				<strong>Drop Address: </strong>{{customer_drop_address}}<br><br>
+				<strong>Pick up time: </strong>{{customer_requested_pickup_time}}<br><br>
+              </div>
+              </td>
+</tr>
+    </body>
+</html>

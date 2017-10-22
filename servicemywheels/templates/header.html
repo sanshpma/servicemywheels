@@ -1,0 +1,57 @@
+<div class="navbar navbar-default emltdp-navbar">
+  <div class="container emltdp-navbar-wrapper">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/website/booking/"><img src="/static/images/header/mylogo.png" alt="Logo" height="50px" width="225px" /></a>
+    </div>
+    <div class="collapse navbar-collapse navbar-right emltdp-navbar-width">
+      <!--<div id="login-status">-->
+      <ul id="login-status" class="nav navbar-nav navbar-right header-profile-drop-down">
+           {% if user.is_authenticated %}
+          <input type="hidden" value="Loggedin" id="checklogin"/>
+          {% endif %}
+          {% if not user.is_authenticated %}
+          <input type="hidden" value="NotLoggedin" id="checklogin"/>
+          {% endif %}
+        <li class="dropdown">
+          <a class="emltdp-navbar-nm" href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <!--<span class="header-profile-pic">-->
+              <!--<img src="/static/images/arrow-down.png" alt=""/>-->
+            <!--</span>-->
+            {% if user.is_authenticated %}
+            <span class="header-profile-name">Hello {{user.customer_name}}</span>
+            <span class="caret header-profile-caret"></span>
+            {% endif %}
+            {% if not user.is_authenticated %}
+            <span id="login_btn" class="header-profile-name">Log in or Sign up</span>
+
+    {% endif %}
+
+          </a>
+          {% if user.is_authenticated %}
+          <ul class="dropdown-menu">
+            <li><a href="/dashboard/myprofile/">My Profile</a></li>
+            <li><a href="/dashboard/myorder/">My Orders</a></li>
+            <!--<li><a href="#">My Vehicle</a></li>-->
+            <li><a href="/auth/logout">Logout</a></li>
+          </ul>
+           {% endif %}
+        </li>
+      </ul>
+      <!--</div>-->
+      <!--  -->
+      
+      <!--<ul class="nav navbar-nav header-menu-items">-->
+      	<!--<li><a href="#">FAQ</a></li>-->
+        <!--<li><a href="#">Contact us</a></li>-->
+      <!--</ul>-->
+      <div class="clearfix"></div>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+{% include 'include-login-pop-up.html' %}

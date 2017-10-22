@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include 'base.html' %}
+<head>
+    <meta charset="utf-8">
+    <title>Service My Wheels</title>
+    <link rel="icon" type="image/png" href="/static/images/servicemywheels_logo_icon.ico"/>
+    <link rel="stylesheet" href="/static/css/home_style.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Engagement' rel='stylesheet' type='text/css'>
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"
+            charset="utf-8"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script type="text/javascript" src="/static/js/dashboard.js"></script>
+</head>
+<body bgcolor="#E6E6FA">
+<article>
+    <img src="/static/images/servicemywheels_logo.jpg" id="logo">
+
+    <h1>Service My Wheels</h1>
+
+    <p>Welcome to Dashboard {{email}}</p>
+
+    <p>Your UserID is: {{id}}</p>
+
+    <div class="dashboard_container">
+        <div class="welcome_msg">Welcome {{name}}!</div>
+        <p>Your Addresses</p>
+        {% for obj in addresses %}
+        <p>{{ obj.address }}</p>
+        {% endfor %}
+        <div class="content">
+            <div class="form">
+                <div class="left-nav">
+                    <ul>
+                        <li class="nav" name="profile">My Profile</li>
+                        <li class="nav" name="orders">My Previous Services</li>
+                        <li class="nav" name="vehicles">My Vehicles</li>
+                        <li class="nav" name="help">Help Center</li>
+                    </ul>
+                </div>
+                <div class="data profile"></div>
+                <div class="data orders"></div>
+                <div class="data vehicles"></div>
+                <div class="data help"></div>
+            </div>
+        </div>
+    </div>
+</article>
+</body>

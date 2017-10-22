@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>ServiceMyWheels</title>
+        {% include 'headtags.html' %}
+		<link rel="stylesheet" href="/static/css/jquery.datetimepicker.css">
+		<!--<link rel="stylesheet" href="/static/doctor/css/jquery-ui.min.css">-->
+        <link rel="stylesheet" href="/static/css/dropdown-search.css">
+
+    {% include 'header.html' %}
+
+     <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="/static/images/servicemywheels_logo_icon.ico"/>
+    <link href='/static/fonts/latin-font.css' rel='stylesheet' type='text/css'>
+    <!--[if IE]>
+    <script src="/static/js/html5.js"></script>
+    <![endif]-->
+        <script src="/static/js/jquery-1.9.1.js"></script>
+        <!--<script src="/static/js/jquery.min.js"></script>-->
+    <!--<link rel="stylesheet" href="/static/css/bootstrap.min.css">-->
+		<script src="https://apis.google.com/js/client:platform.js" async defer></script>
+    <link rel="stylesheet" href="/static/css/bootstrap-social.css">
+
+    <link rel="icon" type="image/png" href="/static/images/servicemywheels_logo_icon.ico"/>
+
+    <!--<link rel="stylesheet" href="/static/css/bootstrap-theme.min.css">-->
+    <!--<script type="text/javascript" src="/static/js/bootstrap.min.js"></script>-->
+    <!--<script type="text/javascript" src="/static/js/d3.min.js"></script>-->
+
+    <!--<link rel="stylesheet" href="/static/css/font-awesome/css/font-awesome.min.css">-->
+    <!--<script src="/static/js/jquery.ui.js"></script>-->
+    <!--<script src="/static/js/jquery.min.js"></script>-->
+<style>
+	.msg {
+					padding: 15px;
+					margin-bottom: 20px;
+					border: 1px solid transparent;
+					border-radius: 4px;
+					color: #31708f;
+					background-color: #d9edf7;
+					border-color: #bce8f1;
+				}
+
+				.emltdp_error {
+					padding: 15px;
+					margin-bottom: 20px;
+					border: 1px solid transparent;
+					border-radius: 4px;
+					color: #a94442;
+					background-color: #f2dede;
+					border-color: #ebccd1;
+				}
+	input::-webkit-input-placeholder ,textarea::-webkit-input-placeholder {
+   color: #777777 !important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #777777 !important;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+    color: #777777 !important;
+}
+
+:-ms-input-placeholder {
+    color: #777777 !important;
+}
+
+
+
+</style>
+    </head>
+
+    {% include 'login.html' %}
+
+
+	<body>
+
+		<!-- <div style="width:100%;">
+			<img class="img-responsive" src="/static/images/temp-banner.jpg" />
+		</div> -->
+		<!-- <div class="container emltdp-home-welcome">
+			<div class="row">
+				<div class="col-sm-12 emltdp-home-welcome-text">
+					<h1 class="text-right">Welcome to Gadi Ki Service</h1>
+					<h2 class="text-right">Your Trusted Vehicle Service Assistant.</h2>
+				</div>
+				<div class="col-sm-6 emltdp-home-video">
+					<div class="emltdp-home-video-play text-center">
+						<img src="/static/images/play.png" alt=""/>
+					</div>
+				</div>
+			</div>
+		</div> -->
+		<div class="home">
+		    <div style="display:block;" class="service-my-wheels-form">
+			<form class="service-my-wheels-form-values" name="booking_form" id="bookingForm" action="/website/booking/" method="post">
+                {% csrf_token %}
+			<div class="container">
+				<div class="col-xs-4 universal-shadow service-my-wheels-form-full" style="background: rgba(255, 255, 255, 0.9);">
+					<div class="row">
+						<div class="col-xs-12 service-my-wheels-form-mobile-full-width">
+							<div class="row">
+							<div class="col-sm-5">
+									<span>MY VEHICLE:</span>
+								</div>
+								<div class="col-xs-7 service-my-wheels-form-check-radio-span">
+								<div class="row">
+								<div class="col-xs-4">
+												<input type="radio" class="myvehicle"  value="Car" name="vehicle_type">
+												<span>CAR</span>
+										</div>
+										<div class="col-xs-4">
+												<input type="radio" class="myvehicle" value="Bike" name="vehicle_type">
+												<span>BIKE</span>
+										</div>
+										</div>
+										</div>
+							</div>
+							<div class="row service-my-wheels-form-spacer">
+							<div class="col-sm-5" style="padding-top: 4px;">
+									<span>BRAND:</span>
+								</div>
+								<div class="col-sm-7">
+									<select id="make" name="brand">
+										<option value="">Select Brand</option>
+									</select>
+								</div>
+							</div>
+							<div class="row service-my-wheels-form-spacer">
+							<div class="col-sm-5" style="padding-top: 4px;">
+									<span>PICK UP TIME:</span>
+								</div>
+								<div class="col-sm-7">
+									<input type="text" required name="pickup_time" placeholder="Choose Pick up Time"id="datetimepicker12">
+								</div>
+							</div>
+
+							<div class="row service-my-wheels-form-spacer">
+							<div class="col-sm-5" style="padding-top: 7px;">
+									<span>COMMON PROBLEMS:</span>
+								</div>
+								<div class="col-xs-7 service-my-wheels-form-check-radio-span">
+								<div class="row">
+                                <input type="hidden" id="generic_problem_length" name="generic_problem_length" value="0">
+										<div class="col-sm-6 emltd-doctor-vitals-right">
+				<ul class="list-inline emltd-header-vitals-right-ul">
+					 <li class="dropdown service-my-wheels-vitals-control-wrap">
+				          <a href="#" style="width: 185px;padding: 6px;  height: 30px;padding-top: 4px;font-size: 12px;" class="dropdown-toggle service-my-wheels-vitals-control" data-toggle="dropdown">
+				          	Select Common Problems <span class="caret-right" style="float: right;margin-top: 5px;"></span>
+				          </a>
+				          <ul id="generic_problem" class="dropdown-menu service-my-wheels-vitals-level" style="margin-left: 141px;margin-top: -56px;">
+				          </ul>
+				        </li>
+				</ul>
+			</div>
+
+
+										</div>
+										</div>
+							</div>
+							<div class="row service-my-wheels-form-spacer" id="selectServiceCenter">
+								<div class="col-sm-1">
+									<input type="checkbox" name="chooseServiceCenter" id="chooseServiceCenter"></div>
+								<div class="col-sm-11" style="font-weight:bold;font-family: 'droid_sansregular';">I want to choose service center
+								</div>
+							</div>
+							<div class="row service-my-wheels-form-spacer" id="serviceCenterforme" style="display:none">
+<div class="col-sm-1">
+								<input type="checkbox" name="chooseServiceCenterByDefault" id="chooseServiceCenteryDefault"></div>
+								<div class="col-sm-11" style="font-weight:bold;font-family: 'droid_sansregular';">Uncheck to choose service center by default</div>
+							</div>
+							<div class="row service-my-wheels-form-spacer serviceCenter" style="display:none">
+							<div class="col-sm-5">
+									<span>SERVICE CENTER:</span>
+								</div>
+								<div class="col-sm-7">
+									<Select id="location" name="location">
+										<option value="">Select Location</option>
+									</select>
+								</div>
+
+							</div>
+							<div class="row service-my-wheels-form-spacer">
+								<div class="col-xs-12">
+							<textarea name="specificProblems" id="specificProblems" placeholder="Please specify the problems with your vehicle"></textarea>
+							</div>
+							</div>
+						</div>
+					</div>
+
+
+				<!-- </div> -->
+				<div class="row" style="padding-left:0px;">
+					<div class="row">
+						<div class="col-xs-12 text-center">
+							<span class="service-my-wheels-form-t-c"><input type="checkbox" name="terms_condition" value=""></span>
+							<span class="service-my-wheels-form-t-c-text">I agree to the <a href="#">Terms and Conditions</a></span>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+				<div class="service-my-wheels-line" style="margin-right:15px;"></div>
+				</div>
+				<div class="row">
+					<div class="row">
+						<div class="col-xs-6 text-right">
+							<input type="reset" class="btn btn-default universal-button" value="Reset" id="resetForm">
+						</div>
+						<div class="col-xs-6">
+							<a href="#"><input type="submit" class="btn btn-default universal-button book-btn" value="Book"></a>
+						</div>
+					</div>
+				</div>
+				</div>
+				<div class="col-xs-8 intro-text">
+					<h1 class="main-title">VEHICLE TUNING & REPAIR SERVICES</h1>
+					<h5>India's First Online Automotive Service Portal</h5>
+				</div>
+				</div>
+			</form>
+		</div>
+		</div>
+		<div id="Services">
+<div class="about-services">
+<h1>Services</h1>
+
+<div class="heading-line"></div>
+
+<p>Quality Services ! Timely Delivery! Quick Response!</p>
+</div>
+
+<div id="aspects">
+	<div class="container">
+<div class="row">
+<div class="row-item col-xs-4"><img src="/static/images/home/quality.png">
+<h2>Happiness Guaranteed</h2>
+</div>
+
+<div class="row-item col-xs-4"><img src="/static/images/home/reliable_%20professionals.png">
+<h2>Reliable Professionals</h2>
+</div>
+
+<div class="row-item col-xs-4"><img src="/static/images/home/time.png">
+<h2>Quick Response</h2>
+</div>
+</div>
+	</div>
+</div>
+</div>
+		<style type="text/css">
+
+			#SECTION_1 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    height: 470px;
+    width: 1286px;
+    perspective-origin: 643px 235px;
+    transform-origin: 643px 235px;
+    background: rgb(249, 249, 249) none repeat scroll 0% 0% / auto padding-box border-box;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#SECTION_1*/
+
+#DIV_2 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    height: 110px;
+    width: 1170px;
+    perspective-origin: 585px 55px;
+    transform-origin: 585px 55px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px 58px;
+    outline: rgb(66, 139, 202) none 0px;
+    padding: 0px 15px;
+}/*#DIV_2*/
+
+#DIV_2:after {
+    box-sizing: border-box;
+    clear: both;
+    color: rgb(66, 139, 202);
+    display: table;
+    width: 1px;
+    perspective-origin: 0.5px 0px;
+    transform-origin: 0.5px 0px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#DIV_2:after*/
+
+#DIV_2:before {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    display: table;
+    width: 1px;
+    perspective-origin: 0.5px 0px;
+    transform-origin: 0.5px 0px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#DIV_2:before*/
+
+#DIV_3 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    height: 80px;
+    width: 1170px;
+    perspective-origin: 585px 40px;
+    transform-origin: 585px 40px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px -15px 30px;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#DIV_3*/
+
+#DIV_3:after {
+    box-sizing: border-box;
+    clear: both;
+    color: rgb(66, 139, 202);
+    display: table;
+    width: 1px;
+    perspective-origin: 0.5px 0px;
+    transform-origin: 0.5px 0px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#DIV_3:after*/
+
+#DIV_3:before {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    display: table;
+    width: 1px;
+    perspective-origin: 0.5px 0px;
+    transform-origin: 0.5px 0px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#DIV_3:before*/
+
+#H1_4 {
+    box-sizing: border-box;
+    height: 30px;
+    text-align: center;
+    width: 1170px;
+    perspective-origin: 585px 15px;
+    transform-origin: 585px 15px;
+    font: normal normal 500 normal 28px/30.7999992370605px GothamLight;
+    margin: 20px 0px 10px;
+}/*#H1_4*/
+
+#BR_5, #BR_19, #BR_27, #BR_33 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#BR_5, #BR_19, #BR_27, #BR_33*/
+
+#DIV_6 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    height: 360px;
+    width: 1170px;
+    perspective-origin: 585px 180px;
+    transform-origin: 585px 180px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px 58px;
+    outline: rgb(66, 139, 202) none 0px;
+    padding: 0px 15px;
+}/*#DIV_6*/
+
+#DIV_6:after {
+    box-sizing: border-box;
+    clear: both;
+    color: rgb(66, 139, 202);
+    display: table;
+    width: 1px;
+    perspective-origin: 0.5px 0px;
+    transform-origin: 0.5px 0px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#DIV_6:after*/
+
+#DIV_6:before {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    display: table;
+    width: 1px;
+    perspective-origin: 0.5px 0px;
+    transform-origin: 0.5px 0px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#DIV_6:before*/
+
+#DIV_7 {
+    background-position: 50% 100%;
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    height: 360px;
+    width: 1140px;
+    perspective-origin: 570px 180px;
+    transform-origin: 570px 180px;
+    background: rgba(0, 0, 0, 0) url(/static/images/process/vehicle.png) no-repeat scroll 50% 100% / auto padding-box border-box;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#DIV_7*/
+
+#DIV_8 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    height: 132px;
+    width: 1170px;
+    perspective-origin: 585px 66px;
+    transform-origin: 585px 66px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px -15px 65px;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#DIV_8*/
+
+#DIV_8:after {
+    box-sizing: border-box;
+    clear: both;
+    color: rgb(66, 139, 202);
+    display: table;
+    width: 1px;
+    perspective-origin: 0.5px 0px;
+    transform-origin: 0.5px 0px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#DIV_8:after*/
+
+#DIV_8:before {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    display: table;
+    width: 1px;
+    perspective-origin: 0.5px 0px;
+    transform-origin: 0.5px 0px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#DIV_8:before*/
+
+#DIV_9 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    float: left;
+    height: 1px;
+    min-height: 1px;
+    position: relative;
+    width: 97.5px;
+    perspective-origin: 48.75px 0.5px;
+    transform-origin: 48.75px 0.5px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+    padding: 0px 15px;
+}/*#DIV_9*/
+
+#DIV_10 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    float: left;
+    height: 121px;
+    min-height: 1px;
+    position: relative;
+    width: 292.5px;
+    perspective-origin: 146.25px 60.5px;
+    transform-origin: 146.25px 60.5px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+    padding: 0px 15px;
+}/*#DIV_10*/
+
+#DIV_11 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    height: 111px;
+    width: 165px;
+    perspective-origin: 82.5px 55.5px;
+    transform-origin: 82.5px 55.5px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px 48.75px;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#DIV_11*/
+
+#IMG_12 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    display: block;
+    height: 67px;
+    vertical-align: middle;
+    width: 54px;
+    perspective-origin: 27px 33.5px;
+    transform-origin: 27px 33.5px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px 55.5px;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#IMG_12*/
+
+#H5_13, #H5_18 {
+    box-sizing: border-box;
+    color: rgb(93, 93, 93);
+    height: 34px;
+    text-align: center;
+    width: 165px;
+    perspective-origin: 82.5px 17px;
+    transform-origin: 82.5px 17px;
+    border: 0px none rgb(93, 93, 93);
+    font: normal normal 500 normal 16px/17.6000003814697px GothamBook;
+    margin: 10px 0px;
+    outline: rgb(93, 93, 93) none 0px;
+}/*#H5_13, #H5_18*/
+
+#DIV_14 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    float: left;
+    height: 1px;
+    min-height: 1px;
+    position: relative;
+    width: 390px;
+    perspective-origin: 195px 0.5px;
+    transform-origin: 195px 0.5px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+    padding: 0px 15px;
+}/*#DIV_14*/
+
+#DIV_15 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    float: left;
+    height: 131px;
+    min-height: 1px;
+    position: relative;
+    width: 292.5px;
+    perspective-origin: 146.25px 65.5px;
+    transform-origin: 146.25px 65.5px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+    padding: 0px 15px;
+}/*#DIV_15*/
+
+#DIV_16 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    height: 101px;
+    width: 165px;
+    perspective-origin: 82.5px 50.5px;
+    transform-origin: 82.5px 50.5px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px 48.75px;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#DIV_16*/
+
+#IMG_17 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    display: block;
+    height: 57px;
+    vertical-align: middle;
+    width: 62px;
+    perspective-origin: 31px 28.5px;
+    transform-origin: 31px 28.5px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px 51.5px;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#IMG_17*/
+
+#DIV_20 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    float: left;
+    height: 1px;
+    min-height: 1px;
+    position: relative;
+    width: 195px;
+    perspective-origin: 97.5px 0.5px;
+    transform-origin: 97.5px 0.5px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+    padding: 0px 15px;
+}/*#DIV_20*/
+
+#DIV_21 {
+    box-sizing: border-box;
+    clear: both;
+    color: rgb(66, 139, 202);
+    width: 1140px;
+    perspective-origin: 570px 0px;
+    transform-origin: 570px 0px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#DIV_21*/
+
+#DIV_22 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    height: 150px;
+    width: 1170px;
+    perspective-origin: 585px 75px;
+    transform-origin: 585px 75px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px -15px;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#DIV_22*/
+
+#DIV_22:after {
+    box-sizing: border-box;
+    clear: both;
+    color: rgb(66, 139, 202);
+    display: table;
+    width: 1px;
+    perspective-origin: 0.5px 0px;
+    transform-origin: 0.5px 0px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#DIV_22:after*/
+
+#DIV_22:before {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    display: table;
+    width: 1px;
+    perspective-origin: 0.5px 0px;
+    transform-origin: 0.5px 0px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#DIV_22:before*/
+
+#DIV_23 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    float: left;
+    height: 150px;
+    min-height: 1px;
+    position: relative;
+    width: 292.5px;
+    perspective-origin: 146.25px 75px;
+    transform-origin: 146.25px 75px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+    padding: 0px 15px;
+}/*#DIV_23*/
+
+#DIV_24 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    height: 150px;
+    width: 165px;
+    perspective-origin: 82.5px 75px;
+    transform-origin: 82.5px 75px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#DIV_24*/
+
+#IMG_25 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    display: block;
+    height: 59px;
+    vertical-align: middle;
+    width: 60px;
+    perspective-origin: 30px 29.5px;
+    transform-origin: 30px 29.5px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px 52.5px;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#IMG_25*/
+
+#H5_26, #H5_32 {
+    box-sizing: border-box;
+    color: rgb(93, 93, 93);
+    height: 51px;
+    text-align: center;
+    width: 165px;
+    perspective-origin: 82.5px 25.5px;
+    transform-origin: 82.5px 25.5px;
+    border: 0px none rgb(93, 93, 93);
+    font: normal normal 500 normal 16px/17.6000003814697px GothamBook;
+    margin: 10px 0px;
+    outline: rgb(93, 93, 93) none 0px;
+}/*#H5_26, #H5_32*/
+
+#DIV_28 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    float: left;
+    height: 1px;
+    min-height: 1px;
+    position: relative;
+    width: 585px;
+    perspective-origin: 292.5px 0.5px;
+    transform-origin: 292.5px 0.5px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+    padding: 0px 15px;
+}/*#DIV_28*/
+
+#DIV_29 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    float: left;
+    height: 134px;
+    min-height: 1px;
+    position: relative;
+    width: 292.5px;
+    perspective-origin: 146.25px 67px;
+    transform-origin: 146.25px 67px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+    padding: 0px 15px;
+}/*#DIV_29*/
+
+#DIV_30 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    float: right;
+    height: 134px;
+    width: 165px;
+    perspective-origin: 82.5px 67px;
+    transform-origin: 82.5px 67px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#DIV_30*/
+
+#IMG_31 {
+    box-sizing: border-box;
+    color: rgb(66, 139, 202);
+    display: block;
+    height: 59px;
+    vertical-align: middle;
+    width: 60px;
+    perspective-origin: 22.5px 31.5px;
+    transform-origin: 22.5px 31.5px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0px 60px;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#IMG_31*/
+
+#DIV_34 {
+    box-sizing: border-box;
+    clear: both;
+    color: rgb(66, 139, 202);
+    width: 1286px;
+    perspective-origin: 643px 0px;
+    transform-origin: 643px 0px;
+    border: 0px none rgb(66, 139, 202);
+    font: normal normal normal normal 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    outline: rgb(66, 139, 202) none 0px;
+}/*#DIV_34*/
+		</style>
+		<div id="process">
+    <section id="SECTION_1"  style="width: 100%;" >
+        <div id="DIV_2">
+		<div id="DIV_3">
+			<h1 id="H1_4" style="border-bottom: 0px;">
+				ITS A SIMPLE FOUR STEP PROCESS!
+			</h1><br id="BR_5">
+      </div>
+	</div>
+	<div id="DIV_6">
+		<div id="DIV_7">
+			<div id="DIV_8">
+				<div id="DIV_9">
+				</div>
+				<div id="DIV_10">
+					<div id="DIV_11">
+						<img src="/static/images/process/vehicle-repair-1.png" alt="" id="IMG_12">
+						<h5 id="H5_13">
+							Pick up as per your schedule time
+						</h5>
+					</div>
+				</div>
+				<div id="DIV_14">
+				</div>
+				<div id="DIV_15">
+					<div id="DIV_16">
+						<img src="/static/images/process/vehicle-repair-2.png" alt="" id="IMG_17">
+						<h5 id="H5_18">
+							Your vehicle gets serviced by authorised service center
+						</h5>
+					</div><br id="BR_19">
+				</div>
+				<div id="DIV_20">
+				</div>
+			</div>
+			<div id="DIV_21">
+			</div>
+			<div id="DIV_22">
+				<div id="DIV_23">
+					<div id="DIV_24">
+						<img src="/static/images/process/vehicle-repair-3.png" alt="" id="IMG_25">
+						<h5 id="H5_26">
+							Request for a pickup through our site
+						</h5>
+					</div>
+				</div>
+				<div id="DIV_28">
+				</div>
+				<div id="DIV_29">
+					<div id="DIV_30">
+						<img src="/static/images/process/vehicle-repair-4.jpg" alt="" id="IMG_31">
+						<h5 id="H5_32">
+							Get your Bike/ Car delivered at place of your choice
+						</h5>
+					</div>
+				</div><br id="BR_33">
+			</div>
+		</div>
+	</div>
+	<div id="DIV_34">
+	</div>
+    </section>
+    </div>
+        <input type="hidden" name="bike_make_list" id="bike_make_list" value='{{bike}}'>
+    <input type="hidden" name="car_make_list" id="car_make_list" value='{{car}}'>
+    <input type="hidden" name="service_center_list" id="service_center_list" value='{{service_center}}'>
+    <input type="hidden" name="generic_problem_list" id="generic_problem_list" value='{{generic_problems}}'>
+    <input type="hidden" name="selected_vehicle_type" id="selected_vehicle_type" value='{{selected_vehicle_type}}'>
+    <input type="hidden" name="selected_brand" id="selected_brand" value='{{selected_brand}}'>
+    <input type="hidden" name="selected_specific_problems_listed" id="selected_specific_problems_listed" value='{{selected_specific_problems_listed}}'>
+    <input type="hidden" name="selected_service_center_address" id="selected_service_center_address" value='{{selected_service_center_address}}'>
+    <input type="hidden" name="selected_pickuptime" id="selected_pickuptime" value='{{pickup_time}}'>
+    <input type="hidden" name="selected_service_type" id="selected_service_type" value='{{selected_service_type}}'>
+    <input type="hidden" name="selected_generic_problems_listed" id="selected_generic_problems_listed"  value='{{selected_generic_problems}}'>
+
+
+        {% include 'footer.html' %}
+
+		<!--<script src="/static/js/jquery.min.js" ></script>-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="/static/js/jquery.datetimepicker.js"></script>
+<!--<script src="/static/js/jquery.placeholder.min.js"></script>-->
+<script src="/static/js/script.js?ver=1"></script>
+<script src="/static/js/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="/static/js/home.js"></script>
+		<script type="text/javascript">
+		$(function(){
+			$('#datetimepicker12').datetimepicker({
+				step: 30,
+				minDate: 0,
+				format: 'Y-m-d H:i'
+				});
+			$.urlParam = function(name){
+
+				   try{
+				    var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+				    return results[1] || 0;
+					}
+
+	        catch(err){
+	        }
+
+				}
+
+				if($.urlParam('val')=='home'){
+					$(".only-home-widgets").hide();
+					$(".only-home").show();
+				}else if($.urlParam('val')=='store-search'){
+					$('#store-drop').trigger('click');
+				}else if($.urlParam('val')=='alerts'){
+					$('#alert-drop').trigger('click');
+				}
+		});
+		$('.emltdp-home-video').click(function(){
+			$('.emltdp-home-tri-section').hide();
+			$('.emltdp-home-welcome').hide();
+			$('.service-my-wheels-form').show();
+		});
+/* drop-down click disable start  */
+
+		$('.service-my-wheels-vitals-level').click(function(event){
+    		event.stopPropagation();
+ 		});
+
+ 		/* drop-down click disable end  */
+
+ 		$(document).on("submit","form",function(e){
+        if($(this).prop("name") == 'loginForm'){
+            e.preventDefault()
+            $loginUser($(this))
+        }
+        if($(this).prop("name") == 'registerForm'){
+        	e.preventDefault()
+        	$newUser($(this))
+        }
+        if($(this).prop("name") == 'guestForm'){
+            e.preventDefault()
+            $guestUser($(this));
+        }
+        if($(this).prop("name") == 'forgotpasswordForm'){
+            e.preventDefault()
+            $forgotPassword($(this))
+        }
+        if($(this).prop("name") == 'booking_form'){
+            e.preventDefault()
+            $(".book-btn").attr('disabled','disabled');
+			$(".book-btn").val('Please wait...');
+//            TODO: validate form
+			var isLoggedIn = $('#checklogin').val();
+            if (isLoggedIn == "Loggedin"){
+                $submitBooking($(this))
+            }
+            else if(isLoggedIn == "NotLoggedin"){
+				var source="book";
+                 $saveBooking($(this),source)
+                 redirectUrlAfterLogin = "processBooking";
+                 jQuery.noConflict();
+                 $('#login_form').show();
+					$('#signup_form').hide();
+					$('#guest_form').hide();
+					$('.register-btn').show();
+					$('.already-account-btn').hide();
+					$('.continue_as_guest-btn').show();
+                $('.emltd-new-patient-pop-up').modal('show');
+                $(".book-btn").attr('disabled',false);
+				$(".book-btn").val('Book');
+            }
+
+        }
+    });
+$('#login_btn').click(function(){
+$('.modal-body-right').show();
+$('#center-line').show();
+$('.modal-register-btn').show();
+$('#login_form').show();
+$('#signup_form').hide();
+$('#forgot_password_form').hide();
+$('#forgot_password_otp_form').hide();
+$('.errorMessage').hide();
+$('#guest_form').hide();
+$('.register-btn').show();
+$('.already-account-btn').hide();
+$('.continue_as_guest-btn').show();
+var source="login";
+ $saveBooking($(this),source)
+redirectUrlAfterLogin = "home";
+  jQuery.noConflict();
+$('.emltd-new-patient-pop-up').modal('show');
+});
+		</script>
+{% include 'footertags.html' %}
+	</body>
+</html>
